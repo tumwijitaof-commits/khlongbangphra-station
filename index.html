@@ -113,9 +113,9 @@
         .tip-item { background: #f8f9fa; padding: 12px; border-radius: 8px; margin-bottom: 10px; border: 1px solid #eee; font-size: 14px; line-height: 1.5; }
         .train-type { font-size: 12px; color: #1976d2; background-color: #e3f2fd; padding: 2px 6px; border-radius: 4px; display: inline-block; }
 
-        /* --- เมนูนำทางด้านล่าง (ปรับให้เป็น 6 เมนู) --- */
+        /* --- เมนูนำทางด้านล่าง (7 เมนู) --- */
         .nav-menu { position: fixed; bottom: 0; left: 0; width: 100%; background-color: #fff; box-shadow: 0 -3px 15px rgba(0,0,0,0.1); display: flex; justify-content: space-around; padding: 8px 0; z-index: 1000; }
-        .nav-btn { background: none; border: none; color: #888; font-size: 10px; font-family: 'Sarabun', sans-serif; cursor: pointer; display: flex; flex-direction: column; align-items: center; width: 16.66%; padding: 5px 0; transition: 0.2s;}
+        .nav-btn { background: none; border: none; color: #888; font-size: 9px; font-family: 'Sarabun', sans-serif; cursor: pointer; display: flex; flex-direction: column; align-items: center; width: 14.28%; padding: 5px 0; transition: 0.2s;}
         .nav-btn.active { color: #7b1e22; font-weight: bold; }
         .nav-icon { font-size: 18px; margin-bottom: 4px; }
 
@@ -128,62 +128,23 @@
         .step-num { background: #7b1e22; color: white; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; flex-shrink: 0; margin-right: 15px; }
 
         /* --- CSS สำหรับหน้า Gallery --- */
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-        }
-        .gallery-item {
-            cursor: pointer;
-            transition: transform 0.2s;
-        }
-        .gallery-item:active {
-            transform: scale(0.95);
-        }
-        .gallery-item img {
-            width: 100%;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            border: 1px solid #eee;
-        }
-        .gallery-title {
-            font-size: 12px;
-            text-align: center;
-            margin-top: 8px;
-            font-weight: bold;
-            color: #555;
-        }
+        .gallery-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .gallery-item { cursor: pointer; transition: transform 0.2s; }
+        .gallery-item:active { transform: scale(0.95); }
+        .gallery-item img { width: 100%; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); border: 1px solid #eee; }
+        .gallery-title { font-size: 12px; text-align: center; margin-top: 8px; font-weight: bold; color: #555; }
+
+        /* --- CSS สำหรับหน้าข้อมูลสถานี (Station Info) --- */
+        .detail-item { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #eee; font-size: 14px; }
+        .detail-label { color: #888; font-weight: 500; }
+        .detail-value { color: #333; font-weight: 600; text-align: right; }
 
         /* --- CSS สำหรับ Lightbox (ระบบคลิกขยายรูป) --- */
-        #lightbox {
-            display: none;
-            position: fixed;
-            z-index: 2000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.9);
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-        }
-        #lightbox-img {
-            max-width: 95%;
-            max-height: 85%;
-            border-radius: 8px;
-        }
-        #lightbox-close {
-            position: absolute;
-            top: 20px;
-            right: 25px;
-            color: white;
-            font-size: 35px;
-            font-weight: bold;
-            cursor: pointer;
-        }
+        #lightbox { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.9); justify-content: center; align-items: center; flex-direction: column; }
+        #lightbox-img { max-width: 95%; max-height: 85%; border-radius: 8px; }
+        #lightbox-close { position: absolute; top: 20px; right: 25px; color: white; font-size: 35px; font-weight: bold; cursor: pointer; }
 
-        @media (max-width: 480px) { .hero-banner { height: 180px; } th, td { padding: 6px 2px; font-size: 12px; } .nav-btn { font-size: 9px; } .nav-icon { font-size: 16px; } }
+        @media (max-width: 480px) { .hero-banner { height: 180px; } th, td { padding: 6px 2px; font-size: 12px; } .nav-btn { font-size: 8.5px; } .nav-icon { font-size: 16px; } }
     </style>
 </head>
 <body>
@@ -235,6 +196,54 @@
                 <div class="tip-item"><strong>⚠️ 4. ยืนรอหลัง "เส้นเหลือง":</strong> ระวังแรงลมดูดจากขบวนรถที่วิ่งผ่าน</div>
                 <div class="tip-item"><strong>📱 5. ข้ามทาง...งดมือถือ/หูฟัง:</strong> เพื่อพร้อมฟังเสียงเตือนจากขบวนรถ</div>
                 <div class="tip-item"><strong>👨‍👩‍👧‍👦 6. ดูแลเด็กและผู้สูงวัย:</strong> จูงมืออย่างใกล้ชิดขณะขึ้น-ลงและข้ามทาง</div>
+            </div>
+        </div>
+
+        <div id="info" class="page-section">
+            <div class="content-card">
+                <h2>🏢 ข้อมูลทั่วไปของสถานี</h2>
+                <div class="detail-item"><div class="detail-label">ชื่อสถานี</div><div class="detail-value">สถานีรถไฟคลองบางพระ<br>(Khlong Bang Phra Railway Station)</div></div>
+                <div class="detail-item"><div class="detail-label">ระดับสถานี</div><div class="detail-value">สถานีรถไฟชั้น 4 (มีนายสถานีประจำการ)</div></div>
+                <div class="detail-item"><div class="detail-label">เส้นทาง</div><div class="detail-value">ทางรถไฟสายตะวันออก</div></div>
+                <div class="detail-item"><div class="detail-label">ที่ตั้ง</div><div class="detail-value">อ.เมืองฉะเชิงเทรา จ.ฉะเชิงเทรา 24000</div></div>
+
+                <h2 style="margin-top: 30px;">📏 ข้อมูลทางเทคนิค</h2>
+                <div class="detail-item"><div class="detail-label">รหัสสถานี</div><div class="detail-value">3021</div></div>
+                <div class="detail-item"><div class="detail-label">กิโลเมตรที่</div><div class="detail-value">53.99 (จากสถานีกรุงเทพ)</div></div>
+                
+                <h2 style="margin-top: 30px;">🛤️ สถานีข้างเคียง</h2>
+                <div class="detail-item"><div class="detail-label">ฝั่งขาออกกรุงเทพฯ</div><div class="detail-value">สถานีคลองแขวงกลั่น (กม. 51.02)</div></div>
+                <div class="detail-item"><div class="detail-label">ฝั่งขาเข้าฉะเชิงเทรา</div><div class="detail-value">สถานีบางเตย (กม. 57.10)</div></div>
+                <div class="detail-item"><div class="detail-label">สถานีชุมทางหลัก</div><div class="detail-value">ชุมทางฉะเชิงเทรา (กม. 60.99)</div></div>
+
+                <div class="info-box" style="margin-top: 25px;">
+                    <p style="font-size: 13px; line-height: 1.6; color: #555; margin: 0;">
+                        <strong>ลักษณะทางพาด:</strong> พื้นที่สถานีตั้งอยู่ในแนวเส้นทางรถไฟสายตะวันออก ซึ่งเป็นเส้นทางสำคัญที่ช่วยเพิ่มขีดความสามารถในการจัดการจราจรทั้งขบวนรถโดยสารและขบวนรถสินค้า
+                    </p>
+                </div>
+
+                <h2 style="margin-top: 35px;">💮 ตราประทับประจำสถานี</h2>
+                
+                <div style="text-align: center; margin-bottom: 20px;">
+                    <img src="KBPSTAMP.jpg" alt="ตราประทับสถานีคลองบางพระ" style="width: 70%; max-width: 250px; border-radius: 50%; box-shadow: 0 6px 12px rgba(0,0,0,0.15); cursor: pointer; transition: 0.3s;" onclick="openLightbox('KBPSTAMP.jpg')">
+                    <p style="font-size: 11px; color: #888; margin-top: 10px;">* แตะที่รูปภาพเพื่อขยายขนาด</p>
+                </div>
+
+                <div class="info-box" style="background-color: #fff9e6; border-color: #ffe0b2;">
+                    <p style="font-size: 13px; color: #555; line-height: 1.6; margin-top: 0; margin-bottom: 12px;">
+                        ตราประทับของสถานีรถไฟคลองบางพระ เป็นการออกแบบที่ผสมผสานอัตลักษณ์ของการเดินทางด้วยรถไฟ เข้ากับของดีและสถานที่สำคัญของท้องถิ่นจังหวัดฉะเชิงเทราได้อย่างลงตัว โดยแต่ละองค์ประกอบสื่อความหมายดังนี้:
+                    </p>
+                    <ul style="font-size: 13px; padding-left: 18px; margin-bottom: 15px; color: #444; line-height: 1.6;">
+                        <li><strong>🚆 รถไฟและอักษรย่อ SRT:</strong> สื่อถึงการรถไฟแห่งประเทศไทยโดยตรง เป็นสัญลักษณ์ของการเดินทาง การเชื่อมต่อ และบทบาทของสถานี</li>
+                        <li><strong>🍮 ขนมชั้นบางเตย:</strong> สื่อถึงของฝากและของหวานขึ้นชื่อประจำท้องถิ่น (ตำบลบางเตย) เอกลักษณ์ทางวัฒนธรรมอาหารที่โดดเด่น</li>
+                        <li><strong>🛕 ยอดสถาปัตยกรรมไทยด้านหลัง:</strong> ลายเส้นสื่อถึงพระอุโบสถวัดโสธรวรารามวรวิหาร (วัดหลวงพ่อโสธร) ศูนย์รวมจิตใจและสัญลักษณ์ที่สำคัญที่สุดของจังหวัด</li>
+                        <li><strong>🛤️ เสาโทรเลขและสายไฟริมทาง:</strong> กิมมิคเล็กๆ ที่สะท้อนถึงบรรยากาศความคลาสสิกและวิถีชีวิตริมทางรถไฟ</li>
+                    </ul>
+                    <p style="font-size: 13px; font-weight: bold; color: #7b1e22; margin-bottom: 0; text-align: center; border-top: 1px dashed #f5b041; padding-top: 12px;">
+                        "ตราประทับนี้ไม่ได้บอกแค่ว่านี่คือสถานีรถไฟ แต่เป็นการบันทึกเรื่องราวเพื่อสร้างความทรงจำและเอกลักษณ์ที่ดีให้กับผู้มาเยือน"
+                    </p>
+                </div>
+
             </div>
         </div>
 
@@ -344,28 +353,28 @@
                 <p style="text-align: center; color: #666; font-size: 14px; margin-bottom: 20px;">รวมประกาศและข้อมูลสำคัญในรูปแบบภาพ</p>
                 
                 <div class="gallery-grid">
-                    <div class="gallery-item" onclick="openLightbox('SRT1.png')">
-                        <img src="SRT1.png" alt="SRT Express">
+                    <div class="gallery-item" onclick="openLightbox('SRT1.jpg')">
+                        <img src="SRT1.jpg" alt="SRT Express">
                         <p class="gallery-title">โปรโมชั่นส่งพัสดุ</p>
                     </div>
-                    <div class="gallery-item" onclick="openLightbox('SRT2.png')">
-                        <img src="SRT2.png" alt="บริการห่อวัตถุด่วน">
+                    <div class="gallery-item" onclick="openLightbox('SRT2.jpg')">
+                        <img src="SRT2.jpg" alt="บริการห่อวัตถุด่วน">
                         <p class="gallery-title">อัตราค่าระวางพัสดุ</p>
                     </div>
-                    <div class="gallery-item" onclick="openLightbox('SRT3.png')">
-                        <img src="SRT3.png" alt="6 ข้อปฏิบัติ">
+                    <div class="gallery-item" onclick="openLightbox('SRT3.jpg')">
+                        <img src="SRT3.jpg" alt="6 ข้อปฏิบัติ">
                         <p class="gallery-title">6 ข้อปฏิบัติความปลอดภัย</p>
                     </div>
-                    <div class="gallery-item" onclick="openLightbox('SRT4.png')">
-                        <img src="SRT4.png" alt="อัปเดตบริการขนส่งพัสดุ">
+                    <div class="gallery-item" onclick="openLightbox('SRT4.jpg')">
+                        <img src="SRT4.jpg" alt="อัปเดตบริการขนส่งพัสดุ">
                         <p class="gallery-title">ขั้นตอนส่งพัสดุ</p>
                     </div>
-                    <div class="gallery-item" onclick="openLightbox('SRT5.png')">
-                        <img src="SRT5.png" alt="เดินทางบ่อยแค่ไหนก็คุ้ม">
+                    <div class="gallery-item" onclick="openLightbox('SRT5.jpg')">
+                        <img src="SRT5.jpg" alt="เดินทางบ่อยแค่ไหนก็คุ้ม">
                         <p class="gallery-title">ตั๋วโดยสารรายเดือน</p>
                     </div>
-                    <div class="gallery-item" onclick="openLightbox('SRT6.png')">
-                        <img src="SRT6.png" alt="ประกาศสถานีคลองบางพระ">
+                    <div class="gallery-item" onclick="openLightbox('SRT6.jpg')">
+                        <img src="SRT6.jpg" alt="ประกาศสถานีคลองบางพระ">
                         <p class="gallery-title">ประกาศสถานี</p>
                     </div>
                 </div>
@@ -500,6 +509,7 @@
 
     <nav class="nav-menu">
         <button class="nav-btn active" onclick="switchPage('home', this)"><span class="nav-icon">🏠</span> หน้าแรก</button>
+        <button class="nav-btn" onclick="switchPage('info', this)"><span class="nav-icon">🏢</span> ข้อมูลสถานี</button>
         <button class="nav-btn" onclick="switchPage('timetable', this)"><span class="nav-icon">⏰</span> เวลาเดินรถ</button>
         <button class="nav-btn" onclick="switchPage('fares', this)"><span class="nav-icon">🎫</span> ค่าโดยสาร</button>
         <button class="nav-btn" onclick="switchPage('gallery', this)"><span class="nav-icon">🖼️</span> สื่อ/ประกาศ</button>
