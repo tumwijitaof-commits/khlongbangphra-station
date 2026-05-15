@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>สถานีรถไฟคลองบางพระ - Khlong Bang Phra Station</title>
+    <style>
+        /* --- ตั้งค่ารูปแบบตัวอักษรและสีพื้นฐาน --- */
+        @import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;700&display=swap');
+        
+        body {
+            font-family: 'Sarabun', sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            padding-bottom: 75px; 
+        }
+        
+        /* --- แถบหัวเว็บ (Header) --- */
+        .header {
+            background-color: #7b1e22; 
+            color: white;
+            text-align: center;
+            padding: 20px 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+        .header h1 { margin: 0; font-size: 22px; font-weight: 700; }
+        .header p { margin: 3px 0 0 0; font-size: 13px; opacity: 0.9; }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            min-height: 500px;
+        }
+        
+        .page-section {
+            display: none; 
+            padding: 15px;
+            animation: fadeIn 0.4s ease-in-out;
+        }
+        
+        .page-section.active { display: block; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- ส่วน Hero Banner --- */
+        .hero-banner {
+            position: relative;
+            width: 100%;
+            height: 250px;
+            border-radius: 15px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+            background-color: #ddd;
+        }
+        .hero-banner img { width: 100%; height: 100%; object-fit: cover; }
+        .hero-overlay {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            color: white;
+            padding: 20px;
+        }
+        .hero-overlay h2 { margin: 0; font-size: 20px; color: white; border: none; }
+
+        /* --- ส่วนบริการออนไลน์ (External Links) --- */
+        .online-services {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+        .service-link {
+            background: white;
+            padding: 15px;
+            border-radius: 12px;
+            text-decoration: none;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            border: 1px solid #eee;
+            transition: 0.2s;
+        }
+        .service-link:active { transform: scale(0.95); background: #fdfdfd; }
+        .service-icon { font-size: 24px; margin-bottom: 8px; }
+        .service-name { font-size: 13px; font-weight: 600; color: #7b1e22; }
+
+        /* --- การ์ดเนื้อหา --- */
+        .content-card {
+            background: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+        }
+        h2 { color: #7b1e22; border-left: 5px solid #7b1e22; padding-left: 12px; margin-top: 0; margin-bottom: 15px; font-size: 19px; }
+
+        .search-box { width: 100%; padding: 14px; font-size: 16px; margin-bottom: 15px; border: 2px solid #eee; border-radius: 10px; box-sizing: border-box; }
+        table { width: 100%; border-collapse: collapse; font-size: 14px; background: white; }
+        th, td { border: 1px solid #f0f0f0; padding: 10px 4px; text-align: center; }
+        th { background-color: #f8f9fa; color: #7b1e22; font-weight: 600; }
+        tr:nth-child(even) { background-color: #fafafa; }
+        
+        .route-title { background-color: #7b1e22; color: white; padding: 10px; text-align: center; font-weight: bold; border: none; }
+        .tip-item { background: #f8f9fa; padding: 12px; border-radius: 8px; margin-bottom: 10px; border: 1px solid #eee; font-size: 14px; line-height: 1.5; }
+        .train-type { font-size: 12px; color: #1976d2; background-color: #e3f2fd; padding: 2px 6px; border-radius: 4px; display: inline-block; }
+
+        /* --- เมนูนำทางด้านล่าง --- */
+        .nav-menu { position: fixed; bottom: 0; left: 0; width: 100%; background-color: #fff; box-shadow: 0 -3px 15px rgba(0,0,0,0.1); display: flex; justify-content: space-around; padding: 10px 0; z-index: 1000; }
+        .nav-btn { background: none; border: none; color: #888; font-size: 11px; font-family: 'Sarabun', sans-serif; cursor: pointer; display: flex; flex-direction: column; align-items: center; width: 20%; padding: 5px 0; transition: 0.2s;}
+        .nav-btn.active { color: #7b1e22; font-weight: bold; }
+        .nav-icon { font-size: 20px; margin-bottom: 4px; }
+
+        .moto-card { background: linear-gradient(135deg, #fffcf5 0%, #fff7e6 100%); border: 1px solid #ffeeba; padding: 20px; border-radius: 12px; margin-bottom: 15px; text-align: center; }
+        .moto-phone { font-size: 22px; font-weight: bold; color: #d32f2f; margin-top: 5px; }
+
+        /* --- กล่องข้อมูลทั่วไป --- */
+        .info-box {
+            background-color: #fffaf0; 
+            padding: 18px; 
+            border-radius: 10px; 
+            margin-bottom: 25px; 
+            border: 1px solid #ffeeba;
+            text-align: left;
+        }
+
+        .step-box {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            background: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #eee;
+        }
+        .step-num {
+            background: #7b1e22;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+            margin-right: 15px;
+        }
+
+        @media (max-width: 480px) { .hero-banner { height: 180px; } th, td { padding: 6px 2px; font-size: 12px; } .nav-btn { font-size: 10px; } }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>สถานีรถไฟคลองบางพระ</h1>
+        <p>KBP 3021 | Chachoengsao, Thailand</p>
+    </div>
+
+    <div class="container">
+        
+        <div id="home" class="page-section active">
+            
+            <div class="hero-banner">
+                <img src="hero.jpg" alt="บรรยากาศสถานีคลองบางพระ">
+                <div class="hero-overlay">
+                    <h2>ยินดีต้อนรับสู่ สถานีคลองบางพระ</h2>
+                    <p>เดินทางสะดวก ปลอดภัย ใส่ใจบริการ</p>
+                </div>
+            </div>
+
+            <h2 style="border: none; font-size: 17px; margin-bottom: 12px;">💻 บริการออนไลน์</h2>
+            <div class="online-services">
+                <a href="https://dticket.railway.co.th" target="_blank" class="service-link">
+                    <span class="service-icon">🎫</span>
+                    <span class="service-name">จองตั๋วออนไลน์ (D-Ticket)</span>
+                </a>
+                <a href="https://ttsview.railway.co.th" target="_blank" class="service-link">
+                    <span class="service-icon">🔍</span>
+                    <span class="service-name">เช็คสถานะรถไฟ (TTS)</span>
+                </a>
+                <a href="https://www.railway.co.th" target="_blank" class="service-link">
+                    <span class="service-icon">🌐</span>
+                    <span class="service-name">เว็บการรถไฟฯ (SRT)</span>
+                </a>
+                <a href="https://tumwijitaof-commits.github.io/train-booking/" target="_blank" class="service-link" style="border-color: #7b1e22; background: #fff5f5;">
+                    <span class="service-icon">📅</span>
+                    <span class="service-name" style="color: #7b1e22;">เครื่องมือคำนวณวันจองตั๋ว</span>
+                </a>
+            </div>
+
+            <div class="content-card">
+                <h2 style="border: none; text-align: center; font-size: 20px; margin-bottom: 5px;">📢 6 ข้อปฏิบัติเพื่อความปลอดภัย</h2>
+                <p style="text-align: center; color: #7b1e22; font-size: 14px; margin-bottom: 20px;">@สถานีคลองบางพระ</p>
+                
+                <div class="tip-item"><strong>🛑 1. ขึ้น-ลง ฝั่งชานชาลาเท่านั้น:</strong> ปลอดภัย ไม่พลัดตก ไม่เสี่ยงรถสวน</div>
+                <div class="tip-item"><strong>👀 2. ตาดู หูฟัง ไม่รีบข้าม:</strong> มองซ้าย-ขวา ห้ามวิ่งตัดหน้ารถไฟ</div>
+                <div class="tip-item"><strong>🎫 3. เผื่อเวลาซื้อตั๋ว 3 นาที:</strong> เพื่อความรวดเร็วและไม่รีบจนเกิดอุบัติเหตุ</div>
+                <div class="tip-item"><strong>⚠️ 4. ยืนรอหลัง "เส้นเหลือง":</strong> ระวังแรงลมดูดจากขบวนรถที่วิ่งผ่าน</div>
+                <div class="tip-item"><strong>📱 5. ข้ามทาง...งดมือถือ/หูฟัง:</strong> เพื่อพร้อมฟังเสียงเตือนจากขบวนรถ</div>
+                <div class="tip-item"><strong>👨‍👩‍👧‍👦 6. ดูแลเด็กและผู้สูงวัย:</strong> จูงมืออย่างใกล้ชิดขณะขึ้น-ลงและข้ามทาง</div>
+            </div>
+        </div>
+
+        <div id="timetable" class="page-section">
+            <div class="content-card">
+                <h2>ตารางเวลาเดินรถ</h2>
+                <input type="text" id="searchTime" class="search-box" onkeyup="searchTable('searchTime', 'tableTime')" placeholder="🔍 ค้นหาเลขขบวน หรือสถานี...">
+                <p style="font-size: 11px; color: #888; text-align: center; margin-bottom: 15px;">เรียงตามเวลาที่ขบวนรถถึงสถานีคลองบางพระ</p>
+                <div style="overflow-x:auto;">
+                    <table id="tableTime">
+                        <thead>
+                            <tr><th>ขบวน</th><th>ประเภท</th><th>ต้นทาง</th><th>ถึง</th><th>ออก</th><th>ปลายทาง</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>384</td><td><span class="train-type">ธรรมดา</span></td><td>ชุมทางฉะเชิงเทรา</td><td><strong>05:29</strong></td><td>05:30</td><td>กรุงเทพ (หัวลำโพง)</td></tr>
+                            <tr><td>380</td><td><span class="train-type">ธรรมดา</span></td><td>ชุมทางฉะเชิงเทรา</td><td><strong>05:54</strong></td><td>05:55</td><td>กรุงเทพ (หัวลำโพง)</td></tr>
+                            <tr><td>372</td><td><span class="train-type">ธรรมดา</span></td><td>ปราจีนบุรี</td><td><strong>06:29</strong></td><td>06:30</td><td>กรุงเทพ (หัวลำโพง)</td></tr>
+                            <tr><td>388</td><td><span class="train-type" style="background:#fff3e0; color:#e65100;">พิเศษชานเมือง</span></td><td>ชุมทางฉะเชิงเทรา</td><td><strong>07:11</strong></td><td>07:12</td><td>กรุงเทพ (หัวลำโพง)</td></tr>
+                            <tr><td>275</td><td><span class="train-type">ธรรมดา</span></td><td>กรุงเทพ (หัวลำโพง)</td><td><strong>07:27</strong></td><td>07:28</td><td>ด่านพรมแดนบ้านคลองลึก</td></tr>
+                            <tr><td>278</td><td><span class="train-type">ธรรมดา</span></td><td>กบินทร์บุรี</td><td><strong>08:40</strong></td><td>08:41</td><td>กรุงเทพ (หัวลำโพง)</td></tr>
+                            <tr><td>283</td><td><span class="train-type">ธรรมดา</span></td><td>กรุงเทพ (หัวลำโพง)</td><td><strong>08:45</strong></td><td>08:46</td><td>จุกเสม็ด</td></tr>
+                            <tr><td>281</td><td><span class="train-type">ธรรมดา</span></td><td>กรุงเทพ (หัวลำโพง)</td><td><strong>09:22</strong></td><td>09:23</td><td>กบินทร์บุรี</td></tr>
+                            <tr><td>280</td><td><span class="train-type">ธรรมดา</span></td><td>ด่านพรมแดนบ้านคลองลึก</td><td><strong>10:32</strong></td><td>10:33</td><td>กรุงเทพ (หัวลำโพง)</td></tr>
+                            <tr><td>367</td><td><span class="train-type">ธรรมดา</span></td><td>กรุงเทพ (หัวลำโพง)</td><td><strong>11:34</strong></td><td>11:35</td><td>ชุมทางฉะเชิงเทรา</td></tr>
+                            <tr><td>368</td><td><span class="train-type">ธรรมดา</span></td><td>ชุมทางฉะเชิงเทรา</td><td><strong>12:43</strong></td><td>12:44</td><td>กรุงเทพ (หัวลำโพง)</td></tr>
+                            <tr><td>389</td><td><span class="train-type" style="background:#fff3e0; color:#e65100;">พิเศษชานเมือง</span></td><td>กรุงเทพ (หัวลำโพง)</td><td><strong>13:22</strong></td><td>13:23</td><td>ชุมทางฉะเชิงเทรา</td></tr>
+                            <tr><td>279</td><td><span class="train-type">ธรรมดา</span></td><td>กรุงเทพ (หัวลำโพง)</td><td><strong>14:07</strong></td><td>14:08</td><td>ด่านพรมแดนบ้านคลองลึก</td></tr>
+                            <tr><td>390</td><td><span class="train-type" style="background:#fff3e0; color:#e65100;">พิเศษชานเมือง</span></td><td>ชุมทางฉะเชิงเทรา</td><td><strong>14:11</strong></td><td>14:12</td><td>กรุงเทพ (หัวลำโพง)</td></tr>
+                            <tr><td>282</td><td><span class="train-type">ธรรมดา</span></td><td>กบินทร์บุรี</td><td><strong>15:41</strong></td><td>15:42</td><td>กรุงเทพ (หัวลำโพง)</td></tr>
+                            <tr><td>284</td><td><span class="train-type">ธรรมดา</span></td><td>จุกเสม็ด</td><td><strong>16:32</strong></td><td>16:33</td><td>กรุงเทพ (หัวลำโพง)</td></tr>
+                            <tr><td>277</td><td><span class="train-type">ธรรมดา</span></td><td>กรุงเทพ (หัวลำโพง)</td><td><strong>16:36</strong></td><td>16:37</td><td>กบินทร์บุรี</td></tr>
+                            <tr><td>379</td><td><span class="train-type">ธรรมดา</span></td><td>กรุงเทพ (หัวลำโพง)</td><td><strong>17:56</strong></td><td>17:57</td><td>ชุมทางฉะเชิงเทรา</td></tr>
+                            <tr><td>391</td><td><span class="train-type" style="background:#fff3e0; color:#e65100;">พิเศษชานเมือง</span></td><td>กรุงเทพ (หัวลำโพง)</td><td><strong>18:16</strong></td><td>18:17</td><td>ชุมทางฉะเชิงเทรา</td></tr>
+                            <tr><td>276</td><td><span class="train-type">ธรรมดา</span></td><td>ด่านพรมแดนบ้านคลองลึก</td><td><strong>18:59</strong></td><td>19:00</td><td>กรุงเทพ (หัวลำโพง)</td></tr>
+                            <tr><td>371</td><td><span class="train-type">ธรรมดา</span></td><td>กรุงเทพ (หัวลำโพง)</td><td><strong>19:10</strong></td><td>19:11</td><td>ปราจีนบุรี</td></tr>
+                            <tr><td>383</td><td><span class="train-type">ธรรมดา</span></td><td>กรุงเทพ (หัวลำโพง)</td><td><strong>20:24</strong></td><td>20:25</td><td>ชุมทางฉะเชิงเทรา</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div id="fares" class="page-section">
+            <div class="content-card">
+                <h2>อัตราค่าโดยสารและหลักเกณฑ์</h2>
+                
+                <div class="info-box">
+                    <h3 style="color: #7b1e22; margin-top: 0; font-size: 16px; margin-bottom: 12px; border-bottom: 2px solid #7b1e22; padding-bottom: 5px;">📌 หลักเกณฑ์การซื้อตั๋ว สิทธิส่วนลด และค่าธรรมเนียม</h3>
+                    
+                    <p style="font-size: 14px; margin: 8px 0 4px 0; font-weight: bold; color: #7b1e22;">📋 ระเบียบปฏิบัติและการตรวจสอบตั๋ว:</p>
+                    <ul style="font-size: 13px; padding-left: 18px; margin-bottom: 10px; color: #444; line-height: 1.6;">
+                        <li><strong>โปรดซื้อตั๋วก่อนขบวนรถออกอย่างน้อย 3 นาที</strong> เพื่อความปลอดภัยและการตรวจสอบสิทธิในการเดินทาง (ตามกฎข้อบังคับว่าด้วยระเบียบการบรรทุกส่งผู้โดยสารฯ เล่ม 2 พ.ศ. 2469)</li>
+                        <li>ตั๋วโดยสาร <strong>ไป-กลับ ทุกขบวน</strong> และ <strong>ขบวนรถปรับอากาศ</strong> กรุณาแสดงบัตรประชาชน หรือ Passport (1 คน ต่อ 1 ตั๋ว)</li>
+                        <li><strong>⚠️ ข้อควรระวังความถูกต้อง:</strong> เมื่อซื้อตั๋วแล้วควรตรวจสอบ ขบวนรถ, วันที่/เดือน/ปี, สถานีต้นทาง-ปลายทาง และจำนวนเงินทอนทันที หากผิดพลาดให้ติดต่อเจ้าหน้าที่ทันที <em>เมื่อพ้นจากที่จำหน่ายตั๋วแล้วภายหลัง พนักงานจะไม่รับผิดชอบใด ๆ ทั้งสิ้น</em></li>
+                        <li>เพื่อความสะดวกรวดเร็ว โปรดเตรียมเงินให้พอดีกับราคาตั๋ว หากมีการทอนเงินกรุณาตรวจสอบนับเงินทอนให้ครบถ้วนก่อนออกจากช่องจำหน่ายตั๋ว</li>
+                    </ul>
+                    
+                    <p style="font-size: 14px; margin: 8px 0 4px 0; font-weight: bold; color: #7b1e22;">🎫 การลดค่าโดยสารครึ่งราคา (ลดร้อยละ 50 ไม่รวมค่าธรรมเนียม):</p>
+                    <ul style="font-size: 13px; padding-left: 18px; margin-bottom: 10px; color: #444; line-height: 1.6;">
+                        <li><strong>เด็ก:</strong> ส่วนสูงเกิน 100 ซม. แต่ไม่เกิน 150 ซม.</li>
+                        <li><strong>พระภิกษุ สามเณร:</strong> ในศาสนาพุทธ หรือนักบุญในศาสนาอิสลามและคริสต์ (ตามระเบียบที่กำหนดไว้)</li>
+                        <li><strong>ทหารในเครื่องแบบ:</strong> และผู้ที่ได้รับเหรียญ สช., รชด., ชัยสมรภูมิ, วน., สจ., กห., ชทก. เป็นต้น</li>
+                        <li>บุคคลตามเกณฑ์กลุ่ม <strong>กพส. , กสข. , ทบส. , มพย.</strong></li>
+                        <li><strong>ผู้สูงอายุ (60 ปีขึ้นไป) สัญชาติไทย:</strong> ได้รับสิทธิลดหย่อนระหว่างวันที่ 01 มิถุนายน - 30 กันยายน ของทุกปี</li>
+                    </ul>
+
+                    <p style="font-size: 14px; margin: 8px 0 4px 0; font-weight: bold; color: #7b1e22;">♿ หลักเกณฑ์ส่วนลดคนพิการและผู้ติดตาม (เริ่ม 1 ก.ค. 2567):</p>
+                    <ul style="font-size: 13px; padding-left: 18px; margin-bottom: 10px; color: #444; line-height: 1.6;">
+                        <li><strong>คนพิการ (สัญชาติไทย):</strong> ลดเฉพาะค่าโดยสารร้อยละ 50 ของอัตราปกติทุกชั้นตลอดทางทุกสาย ส่วนค่าธรรมเนียมต่าง ๆ ไม่ลดให้ (ต้องแสดงบัตรประจำตัวคนพิการ หรือเอกสารทางราชการออกให้)</li>
+                        <li><strong>ผู้ติดตามคนพิการ:</strong> ให้สิทธิได้ 1 คน (ต้องเป็นผู้ดูแลระหว่างเดินทาง) ลดเฉพาะค่าโดยสารร้อยละ 25 ของอัตราปกติทุกชั้นตลอดทางทุกสาย ส่วนค่าธรรมเนียมคิดเต็มราคา</li>
+                        <li>*กรณีผู้มีสิทธิลดราคาหลายประเภท ให้เลือกใช้สิทธิได้เพียงประเภทเดียวเท่านั้น</li>
+                    </ul>
+
+                    <p style="font-size: 14px; margin: 8px 0 4px 0; font-weight: bold; color: #7b1e22;">🎖 สิทธิอาสาสมัคร (อสม.):</p>
+                    <ul style="font-size: 13px; padding-left: 18px; margin-bottom: 10px; color: #444; line-height: 1.6;">
+                        <li><strong>อสม.:</strong> ลดค่าโดยสารเฉพาะชั้น 3 รถนั่งธรรมดา ร้อยละ 20 ระหว่างวันที่ 01 มิถุนายน - 30 กันยายน ของทุกปี</li>
+                    </ul>
+
+                    <p style="font-size: 14px; margin: 8px 0 4px 0; font-weight: bold; color: #7b1e22;">🧑‍🎓 สิทธินักเรียนและนักศึกษา (เดินทางหมู่คณะ):</p>
+                    <ul style="font-size: 13px; padding-left: 18px; margin-bottom: 10px; color: #444; line-height: 1.6;">
+                        <li>ต้องมีหนังสือรับรองจากหัวหน้าสถานศึกษา ระบุสถานีต้นทาง/ปลายทาง และวันเดินทางไป-กลับ พร้อมมีอาจารย์ควบคุมมาด้วย (อัตราส่วนอาจารย์ 1 คน ต่อนักเรียน/นักศึกษา 10 คน โดยอาจารย์คิดค่าโดยสารเท่าเกณฑ์นักเรียน 1 คน)</li>
+                        <li><strong>ตั๋วเที่ยวเดียว:</strong> ลดค่าโดยสาร 25% (ค่าธรรมเนียมคิดเต็มราคา)</li>
+                        <li><strong>ตั๋วไป-กลับ:</strong> ลดให้เฉพาะค่าโดยสารชั้น 3 โดยคิดราคาค่าโดยสารเพียงเที่ยวเดียว</li>
+                    </ul>
+
+                    <p style="font-size: 14px; margin: 8px 0 4px 0; font-weight: bold; color: #7b1e22;">👥 ตั๋วเดินทางหมู่คณะทั่วไป:</p>
+                    <ul style="font-size: 13px; padding-left: 18px; margin-bottom: 10px; color: #444; line-height: 1.6;">
+                        <li>ติดต่อซื้อตั๋วล่วงหน้าได้เกินกว่า 30 วัน สำรองที่นั่งได้ไม่เกิน 40% ของแต่ละชนิดที่นั่งขบวนนั้น ๆ และ<strong>ไม่มีส่วนลดค่าโดยสารใด ๆ</strong></li>
+                    </ul>
+
+                    <p style="font-size: 14px; margin: 8px 0 4px 0; font-weight: bold; color: #d32f2f;">🚨 ค่าธรรมเนียมการซื้อตั๋วบนขบวนรถ (กรณีไม่มีตั๋ว):</p>
+                    <ul style="font-size: 13px; padding-left: 18px; margin-bottom: 5px; color: #444; line-height: 1.6;">
+                        <li>หากพนักงานตรวจพบผู้โดยสารไม่มีตั๋ว จะเรียกเก็บค่าโดยสารตามระยะทาง และ<strong>เรียกเก็บค่าธรรมเนียมซื้อตั๋วบนรถเพิ่ม</strong> ดังนี้:
+                            <br>1. ขบวนรถด่วนพิเศษ, รถด่วน, และรถเร็ว: <strong>คนละ 250 บาท</strong>
+                            <br>2. ขบวนรถประเภทอื่น ๆ นอกเหนือจากข้อ 1: <strong>คนละ 100 บาท</strong>
+                        </li>
+                        <li><strong>❌ ข้อยกเว้น (เก็บเฉพาะค่าโดยสาร ไม่เก็บค่าธรรมเนียมบนรถ):</strong>
+                            <br>- ผู้โดยสารที่อยู่ในเกณฑ์ เด็ก
+                            <br>- นักเรียนในเครื่องแบบ (ไม่เกินชั้นมัธยมศึกษา)
+                            <br>- ผู้โดยสารที่ขึ้นจากที่หยุดรถ / ป้ายหยุดรถที่ไม่มีเจ้าหน้าที่ หรือตัวแทนจำหน่ายตั๋ว
+                            <br>- สถานีต้นทางมีการแจ้งเหตุขัดข้องเกี่ยวกับการจำหน่ายตั๋ว
+                        </li>
+                    </ul>
+                </div>
+
+                <input type="text" id="searchFare" class="search-box" onkeyup="searchTable('searchFare', 'tableFare')" placeholder="🔍 พิมพ์ชื่อสถานีปลายทางเพื่อค้นหา...">
+                <div style="overflow-x:auto;">
+                    <table id="tableFare">
+                        <thead><tr><th>สถานีปลายทาง</th><th>ราคา (บาท)</th></tr></thead>
+                        <tbody>
+                            <tr><td colspan="2" class="route-title">สายกรุงเทพ (หัวลำโพง)</td></tr>
+                            <tr><td>คลองแขวงกลั่น</td><td>2</td></tr><tr><td>คลองเปรง</td><td>2</td></tr><tr><td>คลองอุดมชลจร</td><td>2</td></tr><tr><td>คลองหลวงแพ่ง</td><td>3</td></tr><tr><td>หัวตะเข้</td><td>5</td></tr><tr><td>พระจอมเกล้า</td><td>5</td></tr><tr><td>ลาดกระบัง</td><td>6</td></tr><tr><td>ซอยวัดลานบุญ</td><td>6</td></tr><tr><td>บ้านทับช้าง</td><td>7</td></tr><tr><td>หัวหมาก</td><td>8</td></tr><tr><td>สุขุมวิท 71</td><td>9</td></tr><tr><td>คลองตัน</td><td>9</td></tr><tr><td>อโศก</td><td>10</td></tr><tr><td>มักกะสัน</td><td>11</td></tr><tr><td>พญาไท</td><td>11</td></tr><tr><td>อุรุพงษ์</td><td>11</td></tr><tr><td>ยมราช</td><td>12</td></tr><tr><td>กรุงเทพ (หัวลำโพง)</td><td>12</td></tr>
+
+                            <tr><td colspan="2" class="route-title" style="background-color: #1976d2;">สายจุกเสม็ด</td></tr>
+                            <tr><td>บางเตย</td><td>2</td></tr><tr><td>ชุมทางฉะเชิงเทรา</td><td>2</td></tr><tr><td>แปดริ้ว</td><td>2</td></tr><tr><td>ดอนสีนนท์</td><td>5</td></tr><tr><td>พานทอง</td><td>8</td></tr><tr><td>ชลบุรี</td><td>12</td></tr><tr><td>บางพระ</td><td>14</td></tr><tr><td>เขาพระบาท</td><td>15</td></tr><tr><td>ศรีราชา</td><td>17</td></tr><tr><td>บางละมุง</td><td>19</td></tr><tr><td>พัทยา</td><td>22</td></tr><tr><td>บ้านห้วยขวาง</td><td>24</td></tr><tr><td>ญาณสังวราราม</td><td>25</td></tr><tr><td>สวนนงนุช</td><td>25</td></tr><tr><td>เขาชีจรรย์</td><td>27</td></tr><tr><td>บ้านพลูตาหลวง</td><td>27</td></tr><tr><td>อู่ตะเภา</td><td>28</td></tr><tr><td>จุกเสม็ด</td><td>30</td></tr>
+
+                            <tr><td colspan="2" class="route-title" style="background-color: #388e3c;">สายด่านพรมแดนบ้านคลองลึก</td></tr>
+                            <tr><td>บางเตย</td><td>2</td></tr><tr><td>ชุมทางฉะเชิงเทรา</td><td>2</td></tr><tr><td>บางน้ำเปรี้ยว</td><td>5</td></tr><tr><td>คลองสิบเก้า</td><td>7</td></tr><tr><td>คลองยี่สิบเอ็ด</td><td>8</td></tr><tr><td>โยทะกา</td><td>9</td></tr><tr><td>บ้านสร้าง</td><td>10</td></tr><tr><td>บ้านปากพลี</td><td>13</td></tr><tr><td>ปราจีนบุรี</td><td>15</td></tr><tr><td>โคกมะกอก</td><td>17</td></tr><tr><td>ประจันตคาม</td><td>18</td></tr><tr><td>บ้านดงบัง</td><td>20</td></tr><tr><td>กบินทร์บุรี</td><td>23</td></tr><tr><td>หนองสัง</td><td>25</td></tr><tr><td>บ้านแก้ง</td><td>29</td></tr><tr><td>ศาลาลำดวน</td><td>30</td></tr><tr><td>สระแก้ว</td><td>31</td></tr><tr><td>วัฒนานคร</td><td>36</td></tr><tr><td>อรัญประเทศ</td><td>40</td></tr><tr><td>ด่านฯ บ้านคลองลึก</td><td>41</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p style="text-align: center; font-size: 11px; color: #888; margin-top: 15px;">* อัตราค่าโดยสารประเภทรถธรรมดา ชั้น 3</p>
+            </div>
+        </div>
+
+        <div id="parcels" class="page-section">
+            <div class="content-card">
+                <h2>📦 บริการขนส่งพัสดุและสัมภาระ</h2>
+
+                <div class="info-box" style="background-color: #e3f2fd; border-color: #90caf9;">
+                    <h3 style="color: #1565c0; margin-top: 0; font-size: 16px; border-bottom: 2px solid #90caf9; padding-bottom: 8px;">⏱️ รอบเวลารับส่งพัสดุ (เฉพาะสถานีคลองบางพระ)</h3>
+                    <p style="font-size: 13px; color: #d32f2f; font-weight: bold; margin-bottom: 10px;">⚠️ กรุณานำพัสดุมาส่งที่สถานีก่อนเวลารถออกอย่างน้อย 30 นาที</p>
+                    
+                    <p style="font-size: 14px; margin: 8px 0 4px 0; font-weight: bold; color: #1565c0;">🔹 สายจุกเสม็ด:</p>
+                    <ul style="font-size: 13px; padding-left: 18px; margin-bottom: 10px; color: #444;">
+                        <li>ส่งได้ 1 รอบ/วัน: เวลา <strong>08:46 น.</strong></li>
+                    </ul>
+
+                    <p style="font-size: 14px; margin: 8px 0 4px 0; font-weight: bold; color: #1565c0;">🔹 สายปราจีนบุรี / กบินทร์บุรี / ด่านพรมแดนบ้านคลองลึก:</p>
+                    <ul style="font-size: 13px; padding-left: 18px; margin-bottom: 10px; color: #444;">
+                        <li>ขบวน 275: เวลา <strong>07:28 น.</strong></li>
+                        <li>ขบวน 279: เวลา <strong>14:08 น.</strong></li>
+                        <li>ขบวน 277: เวลา <strong>16:37 น.</strong> <span style="color: #d32f2f;">(ปลายทางสิ้นสุดแค่สถานีกบินทร์บุรี)</span></li>
+                    </ul>
+
+                    <p style="font-size: 14px; margin: 8px 0 4px 0; font-weight: bold; color: #1565c0;">🔹 สายเข้ากรุงเทพ (หัวลำโพง):</p>
+                    <ul style="font-size: 13px; padding-left: 18px; margin-bottom: 0; color: #444;">
+                        <li>ขบวน 278: เวลา <strong>08:41 น.</strong></li>
+                        <li>ขบวน 280: เวลา <strong>10:33 น.</strong></li>
+                        <li>ขบวน 276: เวลา <strong>19:00 น.</strong></li>
+                    </ul>
+                </div>
+                
+                <div class="info-box" style="background-color: #fff5f5; border-color: #ffcdd2;">
+                    <h3 style="color: #d32f2f; margin-top: 0; font-size: 16px; border-bottom: 2px solid #ffcdd2; padding-bottom: 8px;">🔥 โปรโมชั่น SRT Express (One Price)</h3>
+                    <p style="font-size: 13px; color: #555; margin-bottom: 10px;">บริการส่งพัสดุวันเดียวถึง สินค้าขนาดเล็กแบบ "ราคาเดียว" สะดวก รวดเร็ว ส่งได้ทั้งเส้นทางเดียวกันและข้ามสายรถไฟ <br>(โปรโมชั่น: 1 พฤษภาคม 2569 - 31 กรกฎาคม 2569)</p>
+                    <ul style="font-size: 13px; padding-left: 18px; margin-bottom: 10px; color: #444; line-height: 1.6;">
+                        <li><strong>เงื่อนไข:</strong> น้ำหนักไม่เกิน 2 กิโลกรัม/ชิ้น และ ขนาดไม่เกิน 50x50x50 ซม.</li>
+                        <li><strong>ส่งสายเดียวกัน:</strong> 60 บาท/ชิ้น <span style="color:#7b1e22;">(เช่น จากคลองบางพระ ➡ กรุงเทพฯ)</span></li>
+                        <li><strong>ส่งข้ามสาย:</strong> 100 บาท/ชิ้น <span style="color:#7b1e22;">(เช่น จากคลองบางพระ ➡ นครราชสีมา)</span></li>
+                    </ul>
+                </div>
+
+                <div class="info-box" style="background-color: #f8f9fa; border-color: #ddd;">
+                    <p style="text-align: center; font-size: 16px; font-weight: bold; color: #7b1e22; margin-top: 0;">อัปเดตบริการขนส่งพัสดุ การรถไฟฯ</p>
+                    <p style="text-align: center; font-size: 12px; color: #666; margin-bottom: 15px;">(มีผลตั้งแต่ 1 เมษายน 2569 เป็นต้นไป)</p>
+                    
+                    <p style="text-align: center; font-size: 13px; color: #333; margin-bottom: 10px;">คิดค่าบริการราคาปกติ โดยคำนวณจาก <strong>"น้ำหนักจริง (ต่อชิ้น) + ระยะทาง"</strong></p>
+
+                    <div style="background: white; padding: 12px; border-radius: 8px; margin: 10px 0; text-align: center; border: 1px dashed #ccc;">
+                        <h3 style="margin: 0; color: #333;">ค่าส่งเริ่มต้นเพียง <span style="font-size: 26px; color: #d32f2f;">90</span> บาท</h3>
+                        <p style="margin: 5px 0 0 0; font-size: 13px; color: #555;">ระยะเวลาจัดส่งไว ด่วนภายใน 1 วัน</p>
+                    </div>
+
+                    <p style="font-size: 14px; font-weight: bold; color: #7b1e22; margin-top: 15px;">📌 4 ขั้นตอนง่ายๆ ในการส่งพัสดุ:</p>
+                    <div class="step-box">
+                        <div class="step-num">1</div>
+                        <div>
+                            <strong style="display: block; color: #333;">ห่อพัสดุ</strong>
+                            <span style="font-size: 12px; color: #666;">แพ็กสิ่งของให้แน่นหนา ปลอดภัย และต้องเป็นสิ่งของที่ถูกกฎหมาย</span>
+                        </div>
+                    </div>
+                    <div class="step-box">
+                        <div class="step-num">2</div>
+                        <div>
+                            <strong style="display: block; color: #333;">ชั่งน้ำหนัก</strong>
+                            <span style="font-size: 12px; color: #666;">เจ้าหน้าที่จะชั่งน้ำหนักและคำนวณราคาตามระยะทาง</span>
+                        </div>
+                    </div>
+                    <div class="step-box">
+                        <div class="step-num">3</div>
+                        <div>
+                            <strong style="display: block; color: #333;">ส่งที่สถานี</strong>
+                            <span style="font-size: 12px; color: #666;">นำพัสดุไปส่งได้ที่สถานีรถไฟทุกแห่งทั่วประเทศ</span>
+                        </div>
+                    </div>
+                    <div class="step-box">
+                        <div class="step-num">4</div>
+                        <div>
+                            <strong style="display: block; color: #333;">รับหลักฐาน</strong>
+                            <span style="font-size: 12px; color: #666;">รับใบเสร็จเพื่อใช้เป็นหลักฐานและการรับประกันพัสดุ</span>
+                        </div>
+                    </div>
+
+                    <div style="background-color: #fff; padding: 10px; border-left: 4px solid #f57c00; margin-top: 15px; font-size: 12px; color: #666;">
+                        <strong>📢 หมายเหตุ:</strong> การรถไฟแห่งประเทศไทยขออภัยในความไม่สะดวกจากการปรับเปลี่ยนรูปแบบบริการในครั้งนี้ และขอขอบคุณผู้ใช้บริการทุกท่าน
+                    </div>
+                </div>
+
+                <div class="info-box">
+                    <h3 style="color: #7b1e22; margin-top: 0; font-size: 16px; border-bottom: 2px solid #7b1e22; padding-bottom: 8px;">📌 บริการขนส่งสินค้าห่อวัตถุด่วน (Station To Door)</h3>
+                    <p style="font-size: 13px; color: #444; margin-bottom: 5px;">บริการรับขนส่งหีบห่อวัตถุไปกับขบวนรถด่วน รถเร็ว และรถโดยสาร (สายเหนือ, ใต้, อีสาน)</p>
+                    <p style="font-size: 12px; color: #d32f2f; font-weight: bold; background: #ffebee; padding: 8px; border-radius: 5px; display: inline-block;">การคิดค่าระวาง = อัตราค่าระวางด่วน + ค่าธรรมเนียม 50% ของอัตราค่าระวางด่วน (สินค้าทั่วไปขั้นต่ำ 60 บาท)</p>
+
+                    <h4 style="font-size: 13px; margin-top: 15px; margin-bottom: 5px; color: #333;">อัตราค่าระวางขั้นต่ำตามประเภทสิ่งของ:</h4>
+                    <ul style="font-size: 12px; padding-left: 18px; margin-bottom: 10px; color: #444; line-height: 1.6;">
+                        <li><strong>ขั้นต่ำ 100 บาท (เหมาไม่คิดรายชิ้น):</strong> เฟอร์นิเจอร์ (ตู้ โต๊ะ เตียง เก้าอี้), เครื่องใช้ไฟฟ้า/เครื่องกระจายเสียง, เส้นหมี่/วุ้นเส้น, อุปกรณ์ถ่ายภาพยนตร์/ฟิล์ม, โอ่ง/ไหเปล่า, เครื่องยนต์และอุปกรณ์, เครื่องจักรสาน, เครื่องใช้ในการมหรสพ</li>
+                        <li><strong>ขั้นต่ำ 150 บาท (เหมาไม่คิดรายชิ้น):</strong> นุ่น/สำลี/ฝ้าย/ที่นอน/จากตับ/ใบจาก, โคมกระดาษ/กระป๋องเปล่า/โฟม/ปี๊บเปล่า, ของเซ่นไหว้, สัตว์มีชีวิต, กล่อง/ลัง/ขวดเปล่า, เข่ง/กรงเปล่า, ถังเปล่า (ไม่รวมถังน้ำมัน/ก๊าซ), ผลิตภัณฑ์ฟองน้ำ/พลาสติก/อลูมิเนียม</li>
+                        <li><strong>ขั้นต่ำ 100 บาท (คิดเป็นรายชิ้น/คัน):</strong> รถคนป่วย, รถเข็น/รถลาก, รถเด็กอ่อน, รถถ่อ/รถโยก, รถจักรยาน, รถพ่วง, ยานยนต์ขนาดย่อม, จักรเย็บผ้า</li>
+                        <li><strong>ขั้นต่ำ 150 บาท (คิดเป็นรายชิ้น):</strong> เครื่องคอมพิวเตอร์ และอุปกรณ์ส่วนควบ</li>
+                    </ul>
+
+                    <h4 style="font-size: 13px; margin-top: 15px; margin-bottom: 5px; color: #333;">ถังบรรจุน้ำขนาดใหญ่ (เกิน 2 ลบ.ม. หรือ 2.5x1.0x0.8 เมตร):</h4>
+                    <ul style="font-size: 12px; padding-left: 18px; margin-bottom: 0; color: #444; line-height: 1.6;">
+                        <li>ไม่เกิน 400 แกลลอน: <strong>180 บาท</strong></li>
+                        <li>401 - 600 แกลลอน: <strong>270 บาท</strong></li>
+                        <li>601 - 800 แกลลอน: <strong>350 บาท</strong></li>
+                        <li>801 - 1,000 แกลลอน: <strong>500 บาท</strong></li>
+                    </ul>
+                </div>
+
+                <div style="background-color: #b71c1c; color: white; text-align: center; padding: 15px; border-radius: 8px; margin-top: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                    <p style="margin: 0; font-size: 15px; font-weight: bold; letter-spacing: 0.5px;">
+                        📞 สอบถามข้อมูลเพิ่มเติมได้ที่สถานีรถไฟทั่วประเทศ หรือ โทร 1690
+                    </p>
+                </div>
+                
+            </div>
+        </div>
+
+        <div id="services" class="page-section">
+            <div class="content-card">
+                <h2>บริการรถรับจ้าง</h2>
+                <p style="text-align: center; color: #666; margin-bottom: 20px;">คิววินมอเตอร์ไซค์ประจำสถานีคลองบางพระ</p>
+                <div class="moto-card"><p style="margin:0;">ติดต่อ พี่วัก</p><div class="moto-phone">📞 095-476-9351</div></div>
+                <div class="moto-card"><p style="margin:0;">ติดต่อ พี่เกษม</p><div class="moto-phone">📞 093-557-8749</div></div>
+            </div>
+        </div>
+
+    </div>
+
+    <nav class="nav-menu">
+        <button class="nav-btn active" onclick="switchPage('home', this)"><span class="nav-icon">🏠</span> หน้าแรก</button>
+        <button class="nav-btn" onclick="switchPage('timetable', this)"><span class="nav-icon">⏰</span> เวลาเดินรถ</button>
+        <button class="nav-btn" onclick="switchPage('fares', this)"><span class="nav-icon">🎫</span> ค่าโดยสาร</button>
+        <button class="nav-btn" onclick="switchPage('parcels', this)"><span class="nav-icon">📦</span> ส่งพัสดุ</button>
+        <button class="nav-btn" onclick="switchPage('services', this)"><span class="nav-icon">🛵</span> รถรับจ้าง</button>
+    </nav>
+
+    <script>
+        function switchPage(pageId, btnElement) {
+            document.querySelectorAll('.page-section').forEach(sec => sec.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+            document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+            btnElement.classList.add('active');
+            window.scrollTo(0, 0);
+        }
+        function searchTable(inputId, tableId) {
+            let filter = document.getElementById(inputId).value.toLowerCase();
+            let tr = document.getElementById(tableId).getElementsByTagName("tr");
+            for (let i = 1; i < tr.length; i++) {
+                if(tr[i].getElementsByTagName("td")[0].classList.contains("route-title")) continue;
+                tr[i].style.display = tr[i].textContent.toLowerCase().includes(filter) ? "" : "none";
+            }
+        }
+    </script>
+</body>
+</html>
