@@ -4,8 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>สถานีรถไฟคลองบางพระ - Khlong Bang Phra Station</title>
-        <meta name="description" content="เว็บไซต์ให้บริการข้อมูลสถานีรถไฟคลองบางพระ (KBP 3021) เช็คตารางเวลาเดินรถ อัตราค่าโดยสาร บริการส่งพัสดุ และระเบียบความปลอดภัย">
-    <meta name="keywords" content="สถานีรถไฟคลองบางพระ, ตารางเวลารถไฟคลองบางพระ, ค่าโดยสารรถไฟ, ส่งพัสดุรถไฟ, รฟท, รถไฟฉะเชิงเทรา">
     <style>
         /* --- ตั้งค่ารูปแบบตัวอักษรและสีพื้นฐาน --- */
         @import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;700&display=swap');
@@ -115,49 +113,77 @@
         .tip-item { background: #f8f9fa; padding: 12px; border-radius: 8px; margin-bottom: 10px; border: 1px solid #eee; font-size: 14px; line-height: 1.5; }
         .train-type { font-size: 12px; color: #1976d2; background-color: #e3f2fd; padding: 2px 6px; border-radius: 4px; display: inline-block; }
 
-        /* --- เมนูนำทางด้านล่าง --- */
-        .nav-menu { position: fixed; bottom: 0; left: 0; width: 100%; background-color: #fff; box-shadow: 0 -3px 15px rgba(0,0,0,0.1); display: flex; justify-content: space-around; padding: 10px 0; z-index: 1000; }
-        .nav-btn { background: none; border: none; color: #888; font-size: 11px; font-family: 'Sarabun', sans-serif; cursor: pointer; display: flex; flex-direction: column; align-items: center; width: 20%; padding: 5px 0; transition: 0.2s;}
+        /* --- เมนูนำทางด้านล่าง (ปรับให้เป็น 6 เมนู) --- */
+        .nav-menu { position: fixed; bottom: 0; left: 0; width: 100%; background-color: #fff; box-shadow: 0 -3px 15px rgba(0,0,0,0.1); display: flex; justify-content: space-around; padding: 8px 0; z-index: 1000; }
+        .nav-btn { background: none; border: none; color: #888; font-size: 10px; font-family: 'Sarabun', sans-serif; cursor: pointer; display: flex; flex-direction: column; align-items: center; width: 16.66%; padding: 5px 0; transition: 0.2s;}
         .nav-btn.active { color: #7b1e22; font-weight: bold; }
-        .nav-icon { font-size: 20px; margin-bottom: 4px; }
+        .nav-icon { font-size: 18px; margin-bottom: 4px; }
 
         .moto-card { background: linear-gradient(135deg, #fffcf5 0%, #fff7e6 100%); border: 1px solid #ffeeba; padding: 20px; border-radius: 12px; margin-bottom: 15px; text-align: center; }
         .moto-phone { font-size: 22px; font-weight: bold; color: #d32f2f; margin-top: 5px; }
 
         /* --- กล่องข้อมูลทั่วไป --- */
-        .info-box {
-            background-color: #fffaf0; 
-            padding: 18px; 
-            border-radius: 10px; 
-            margin-bottom: 25px; 
-            border: 1px solid #ffeeba;
-            text-align: left;
-        }
+        .info-box { background-color: #fffaf0; padding: 18px; border-radius: 10px; margin-bottom: 25px; border: 1px solid #ffeeba; text-align: left; }
+        .step-box { display: flex; align-items: flex-start; margin-bottom: 15px; background: #fff; padding: 15px; border-radius: 8px; border: 1px solid #eee; }
+        .step-num { background: #7b1e22; color: white; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; flex-shrink: 0; margin-right: 15px; }
 
-        .step-box {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 15px;
-            background: #fff;
-            padding: 15px;
-            border-radius: 8px;
+        /* --- CSS สำหรับหน้า Gallery --- */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        .gallery-item {
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .gallery-item:active {
+            transform: scale(0.95);
+        }
+        .gallery-item img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
             border: 1px solid #eee;
         }
-        .step-num {
-            background: #7b1e22;
-            color: white;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .gallery-title {
+            font-size: 12px;
+            text-align: center;
+            margin-top: 8px;
             font-weight: bold;
-            flex-shrink: 0;
-            margin-right: 15px;
+            color: #555;
         }
 
-        @media (max-width: 480px) { .hero-banner { height: 180px; } th, td { padding: 6px 2px; font-size: 12px; } .nav-btn { font-size: 10px; } }
+        /* --- CSS สำหรับ Lightbox (ระบบคลิกขยายรูป) --- */
+        #lightbox {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.9);
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        #lightbox-img {
+            max-width: 95%;
+            max-height: 85%;
+            border-radius: 8px;
+        }
+        #lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            color: white;
+            font-size: 35px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        @media (max-width: 480px) { .hero-banner { height: 180px; } th, td { padding: 6px 2px; font-size: 12px; } .nav-btn { font-size: 9px; } .nav-icon { font-size: 16px; } }
     </style>
 </head>
 <body>
@@ -260,45 +286,36 @@
                     
                     <p style="font-size: 14px; margin: 8px 0 4px 0; font-weight: bold; color: #7b1e22;">📋 ระเบียบปฏิบัติและการตรวจสอบตั๋ว:</p>
                     <ul style="font-size: 13px; padding-left: 18px; margin-bottom: 10px; color: #444; line-height: 1.6;">
-                        <li><strong>โปรดซื้อตั๋วก่อนขบวนรถออกอย่างน้อย 3 นาที</strong> เพื่อความปลอดภัยและการตรวจสอบสิทธิในการเดินทาง (ตามกฎข้อบังคับว่าด้วยระเบียบการบรรทุกส่งผู้โดยสารฯ เล่ม 2 พ.ศ. 2469)</li>
+                        <li><strong>โปรดซื้อตั๋วก่อนขบวนรถออกอย่างน้อย 3 นาที</strong> เพื่อความปลอดภัยและการตรวจสอบสิทธิในการเดินทาง</li>
                         <li>ตั๋วโดยสาร <strong>ไป-กลับ ทุกขบวน</strong> และ <strong>ขบวนรถปรับอากาศ</strong> กรุณาแสดงบัตรประชาชน หรือ Passport (1 คน ต่อ 1 ตั๋ว)</li>
-                        <li><strong>⚠️ ข้อควรระวังความถูกต้อง:</strong> เมื่อซื้อตั๋วแล้วควรตรวจสอบ ขบวนรถ, วันที่/เดือน/ปี, สถานีต้นทาง-ปลายทาง และจำนวนเงินทอนทันที หากผิดพลาดให้ติดต่อเจ้าหน้าที่ทันที <em>เมื่อพ้นจากที่จำหน่ายตั๋วแล้วภายหลัง พนักงานจะไม่รับผิดชอบใด ๆ ทั้งสิ้น</em></li>
-                        <li>เพื่อความสะดวกรวดเร็ว โปรดเตรียมเงินให้พอดีกับราคาตั๋ว หากมีการทอนเงินกรุณาตรวจสอบนับเงินทอนให้ครบถ้วนก่อนออกจากช่องจำหน่ายตั๋ว</li>
+                        <li><strong>⚠️ ข้อควรระวัง:</strong> เมื่อซื้อตั๋วแล้วควรตรวจสอบ ขบวนรถ, วันที่, สถานีต้นทาง-ปลายทาง และจำนวนเงินทอนทันที <em>เมื่อพ้นจากที่จำหน่ายตั๋วแล้วภายหลัง พนักงานจะไม่รับผิดชอบใด ๆ ทั้งสิ้น</em></li>
                     </ul>
                     
-                    <p style="font-size: 14px; margin: 8px 0 4px 0; font-weight: bold; color: #7b1e22;">🎫 การลดค่าโดยสารครึ่งราคา (ลดร้อยละ 50 ไม่รวมค่าธรรมเนียม):</p>
+                    <p style="font-size: 14px; margin: 8px 0 4px 0; font-weight: bold; color: #7b1e22;">🎫 การลดค่าโดยสารครึ่งราคา (ลดร้อยละ 50):</p>
                     <ul style="font-size: 13px; padding-left: 18px; margin-bottom: 10px; color: #444; line-height: 1.6;">
                         <li><strong>เด็ก:</strong> ส่วนสูงเกิน 100 ซม. แต่ไม่เกิน 150 ซม.</li>
-                        <li><strong>พระภิกษุ สามเณร:</strong> ในศาสนาพุทธ หรือนักบุญในศาสนาอิสลามและคริสต์ (ตามระเบียบที่กำหนดไว้)</li>
+                        <li><strong>พระภิกษุ สามเณร:</strong> ในศาสนาพุทธ หรือนักบุญในศาสนาอิสลามและคริสต์</li>
                         <li><strong>ทหารในเครื่องแบบ:</strong> และผู้ที่ได้รับเหรียญ สช., รชด., ชัยสมรภูมิ, วน., สจ., กห., ชทก. เป็นต้น</li>
-                        <li>บุคคลตามเกณฑ์กลุ่ม <strong>กพส. , กสข. , ทบส. , มพย.</strong></li>
-                        <li><strong>ผู้สูงอายุ (60 ปีขึ้นไป) สัญชาติไทย:</strong> ได้รับสิทธิลดหย่อนระหว่างวันที่ 01 มิถุนายน - 30 กันยายน ของทุกปี</li>
+                        <li>บุคคลตามเกณฑ์กลุ่ม กพส. , กสข. , ทบส. , มพย.</li>
+                        <li><strong>ผู้สูงอายุ (60 ปีขึ้นไป) สัญชาติไทย:</strong> (ลดเฉพาะช่วง 01 มิ.ย. - 30 ก.ย. ของทุกปี)</li>
                     </ul>
 
-                    <p style="font-size: 14px; margin: 8px 0 4px 0; font-weight: bold; color: #7b1e22;">♿ หลักเกณฑ์ส่วนลดคนพิการและผู้ติดตาม (เริ่ม 1 ก.ค. 2567):</p>
+                    <p style="font-size: 14px; margin: 8px 0 4px 0; font-weight: bold; color: #7b1e22;">♿ ส่วนลดคนพิการ (เริ่ม 1 ก.ค. 2567):</p>
                     <ul style="font-size: 13px; padding-left: 18px; margin-bottom: 10px; color: #444; line-height: 1.6;">
-                        <li><strong>คนพิการ (สัญชาติไทย):</strong> ลดเฉพาะค่าโดยสารร้อยละ 50 ของอัตราปกติทุกชั้นตลอดทางทุกสาย ส่วนค่าธรรมเนียมต่าง ๆ ไม่ลดให้ (ต้องแสดงบัตรประจำตัวคนพิการ หรือเอกสารทางราชการออกให้)</li>
-                        <li><strong>ผู้ติดตามคนพิการ:</strong> ให้สิทธิได้ 1 คน (ต้องเป็นผู้ดูแลระหว่างเดินทาง) ลดเฉพาะค่าโดยสารร้อยละ 25 ของอัตราปกติทุกชั้นตลอดทางทุกสาย ส่วนค่าธรรมเนียมคิดเต็มราคา</li>
-                        <li>*กรณีผู้มีสิทธิลดราคาหลายประเภท ให้เลือกใช้สิทธิได้เพียงประเภทเดียวเท่านั้น</li>
+                        <li><strong>คนพิการ (สัญชาติไทย):</strong> ลดเฉพาะค่าโดยสารร้อยละ 50 ทุกชั้นตลอดสาย (ไม่รวมค่าธรรมเนียม)</li>
+                        <li><strong>ผู้ติดตามคนพิการ (1 คน):</strong> ลดเฉพาะค่าโดยสารร้อยละ 25 (ไม่รวมค่าธรรมเนียม)</li>
                     </ul>
 
                     <p style="font-size: 14px; margin: 8px 0 4px 0; font-weight: bold; color: #7b1e22;">🎖 สิทธิอาสาสมัคร (อสม.):</p>
                     <ul style="font-size: 13px; padding-left: 18px; margin-bottom: 10px; color: #444; line-height: 1.6;">
-                        <li><strong>อสม.:</strong> ลดค่าโดยสารเฉพาะชั้น 3 รถนั่งธรรมดา ร้อยละ 20 ระหว่างวันที่ 01 มิถุนายน - 30 กันยายน ของทุกปี</li>
+                        <li>ลดค่าโดยสารเฉพาะชั้น 3 รถนั่งธรรมดา ร้อยละ 20 (เฉพาะช่วง 01 มิ.ย. - 30 ก.ย. ของทุกปี)</li>
                     </ul>
 
-                    <p style="font-size: 14px; margin: 8px 0 4px 0; font-weight: bold; color: #d32f2f;">🚨 ค่าธรรมเนียมการซื้อตั๋วบนขบวนรถ (กรณีไม่มีตั๋ว):</p>
+                    <p style="font-size: 14px; margin: 8px 0 4px 0; font-weight: bold; color: #d32f2f;">🚨 ค่าธรรมเนียมบนขบวนรถ (กรณีไม่มีตั๋ว):</p>
                     <ul style="font-size: 13px; padding-left: 18px; margin-bottom: 5px; color: #444; line-height: 1.6;">
-                        <li>หากพนักงานตรวจพบผู้โดยสารไม่มีตั๋ว จะเรียกเก็บค่าโดยสารตามระยะทาง และ<strong>เรียกเก็บค่าธรรมเนียมซื้อตั๋วบนรถเพิ่ม</strong> ดังนี้:
-                            <br>1. ขบวนรถด่วนพิเศษ, รถด่วน, และรถเร็ว: <strong>คนละ 250 บาท</strong>
-                            <br>2. ขบวนรถประเภทอื่น ๆ นอกเหนือจากข้อ 1: <strong>คนละ 100 บาท</strong>
-                        </li>
-                        <li><strong>❌ ข้อยกเว้น (เก็บเฉพาะค่าโดยสาร ไม่เก็บค่าธรรมเนียมบนรถ):</strong>
-                            <br>- ผู้โดยสารที่อยู่ในเกณฑ์ เด็ก
-                            <br>- นักเรียนในเครื่องแบบ (ไม่เกินชั้นมัธยมศึกษา)
-                            <br>- ผู้โดยสารที่ขึ้นจากที่หยุดรถ / ป้ายหยุดรถที่ไม่มีเจ้าหน้าที่ หรือตัวแทนจำหน่ายตั๋ว
-                            <br>- สถานีต้นทางมีการแจ้งเหตุขัดข้องเกี่ยวกับการจำหน่ายตั๋ว
-                        </li>
+                        <li>ขบวนรถด่วนพิเศษ, รถด่วน, และรถเร็ว: <strong>คนละ 250 บาท</strong></li>
+                        <li>ขบวนรถประเภทอื่น ๆ นอกเหนือจากข้อ 1: <strong>คนละ 100 บาท</strong></li>
+                        <li><em>(ข้อยกเว้นไม่เก็บค่าธรรมเนียม: เด็ก, นักเรียนในเครื่องแบบ, ขึ้นจากป้ายหยุดรถที่ไม่มีการขายตั๋ว, หรือระบบตั๋วขัดข้อง)</em></li>
                     </ul>
                 </div>
 
@@ -318,7 +335,41 @@
                         </tbody>
                     </table>
                 </div>
-                <p style="text-align: center; font-size: 11px; color: #888; margin-top: 15px;">* อัตราค่าโดยสารประเภทรถธรรมดา ชั้น 3</p>
+            </div>
+        </div>
+
+        <div id="gallery" class="page-section">
+            <div class="content-card">
+                <h2>🖼️ สื่อประชาสัมพันธ์</h2>
+                <p style="text-align: center; color: #666; font-size: 14px; margin-bottom: 20px;">รวมประกาศและข้อมูลสำคัญในรูปแบบภาพ</p>
+                
+                <div class="gallery-grid">
+                    <div class="gallery-item" onclick="openLightbox('SRT1.png')">
+                        <img src="SRT1.jpg" alt="SRT Express">
+                        <p class="gallery-title">โปรโมชั่นส่งพัสดุ</p>
+                    </div>
+                    <div class="gallery-item" onclick="openLightbox('SRT2.png')">
+                        <img src="SRT2.jpg" alt="บริการห่อวัตถุด่วน">
+                        <p class="gallery-title">อัตราค่าระวางพัสดุ</p>
+                    </div>
+                    <div class="gallery-item" onclick="openLightbox('SRT3.png')">
+                        <img src="SRT3.jpg" alt="6 ข้อปฏิบัติ">
+                        <p class="gallery-title">6 ข้อปฏิบัติความปลอดภัย</p>
+                    </div>
+                    <div class="gallery-item" onclick="openLightbox('SRT4.png')">
+                        <img src="SRT4.jpg" alt="อัปเดตบริการขนส่งพัสดุ">
+                        <p class="gallery-title">ขั้นตอนส่งพัสดุ</p>
+                    </div>
+                    <div class="gallery-item" onclick="openLightbox('SRT5.png')">
+                        <img src="SRT5.jpg" alt="เดินทางบ่อยแค่ไหนก็คุ้ม">
+                        <p class="gallery-title">ตั๋วโดยสารรายเดือน</p>
+                    </div>
+                    <div class="gallery-item" onclick="openLightbox('SRT6.png')">
+                        <img src="SRT6.jpg" alt="ประกาศสถานีคลองบางพระ">
+                        <p class="gallery-title">ประกาศสถานี</p>
+                    </div>
+                </div>
+                <p style="text-align: center; font-size: 11px; color: #888; margin-top: 20px;">* แตะที่รูปภาพเพื่อขยายขนาด</p>
             </div>
         </div>
 
@@ -408,7 +459,7 @@
 
                 <div class="info-box">
                     <h3 style="color: #7b1e22; margin-top: 0; font-size: 16px; border-bottom: 2px solid #7b1e22; padding-bottom: 8px;">📌 บริการขนส่งสินค้าห่อวัตถุด่วน (Station To Door)</h3>
-                    <p style="font-size: 13px; color: #444; margin-bottom: 5px;">บริการรับขนส่งหีบห่อวัตถุไปกับขบวนรถด่วน รถเร็ว และรถโดยสาร (สายเหนือ, ใต้, อีสาน)</p>
+                    <p style="font-size: 13px; color: #444; margin-bottom: 5px;">บริการรับขนส่งหีบห่อวัตถุ</p>
                     <p style="font-size: 12px; color: #d32f2f; font-weight: bold; background: #ffebee; padding: 8px; border-radius: 5px; display: inline-block;">การคิดค่าระวาง = อัตราค่าระวางด่วน + ค่าธรรมเนียม 50% ของอัตราค่าระวางด่วน (สินค้าทั่วไปขั้นต่ำ 60 บาท)</p>
 
                     <h4 style="font-size: 13px; margin-top: 15px; margin-bottom: 5px; color: #333;">อัตราค่าระวางขั้นต่ำตามประเภทสิ่งของ:</h4>
@@ -433,7 +484,6 @@
                         📞 สอบถามข้อมูลเพิ่มเติมได้ที่สถานีรถไฟทั่วประเทศ หรือ โทร 1690
                     </p>
                 </div>
-                
             </div>
         </div>
 
@@ -452,9 +502,15 @@
         <button class="nav-btn active" onclick="switchPage('home', this)"><span class="nav-icon">🏠</span> หน้าแรก</button>
         <button class="nav-btn" onclick="switchPage('timetable', this)"><span class="nav-icon">⏰</span> เวลาเดินรถ</button>
         <button class="nav-btn" onclick="switchPage('fares', this)"><span class="nav-icon">🎫</span> ค่าโดยสาร</button>
+        <button class="nav-btn" onclick="switchPage('gallery', this)"><span class="nav-icon">🖼️</span> สื่อ/ประกาศ</button>
         <button class="nav-btn" onclick="switchPage('parcels', this)"><span class="nav-icon">📦</span> ส่งพัสดุ</button>
-        <button class="nav-btn" onclick="switchPage('services', this)"><span class="nav-icon">🛵</span> รถรับจ้าง</button>
+        <button class="nav-btn" onclick="switchPage('services', this)"><span class="nav-icon">🛵</span> จุดเชื่อมต่อ</button>
     </nav>
+
+    <div id="lightbox" onclick="closeLightbox()">
+        <span id="lightbox-close">&times;</span>
+        <img id="lightbox-img" src="">
+    </div>
 
     <script>
         function switchPage(pageId, btnElement) {
@@ -471,6 +527,15 @@
                 if(tr[i].getElementsByTagName("td")[0].classList.contains("route-title")) continue;
                 tr[i].style.display = tr[i].textContent.toLowerCase().includes(filter) ? "" : "none";
             }
+        }
+        
+        // ฟังก์ชันสำหรับเปิดปิด Lightbox
+        function openLightbox(imageSrc) {
+            document.getElementById('lightbox-img').src = imageSrc;
+            document.getElementById('lightbox').style.display = 'flex';
+        }
+        function closeLightbox() {
+            document.getElementById('lightbox').style.display = 'none';
         }
     </script>
 </body>
