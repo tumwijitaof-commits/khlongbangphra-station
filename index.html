@@ -4,14 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>สถานีรถไฟคลองบางพระ - Khlong Bang Phra Station</title>
-    <meta name="theme-color" content="#7b1e22">
+    <meta name="description" content="ข้อมูลเวลาเดินรถ ค่าโดยสาร การส่งพัสดุ และบริการของสถานีรถไฟคลองบางพระ ทางรถไฟสายตะวันออก จังหวัดฉะเชิงเทรา">
+    <meta name="theme-color" content="#701b24">
+    <meta property="og:title" content="สถานีรถไฟคลองบางพระ">
+    <meta property="og:description" content="ตรวจสอบเวลาเดินรถ ค่าโดยสาร การส่งพัสดุ และข้อมูลบริการของสถานี">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="hero.jpg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         /* =========================================================
            Modern Official Responsive Theme : KBP Station Website
            ปรับให้เต็มหน้าจอ รองรับคอม แท็บเล็ต และมือถือ
         ========================================================= */
-        @import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700;800&display=swap');
-
         :root {
             --srt-maroon: #7b1e22;
             --srt-maroon-dark: #4b0f13;
@@ -783,81 +789,1095 @@
             }
         }
 
+        /* =========================================================
+           KBP STATION V2 — MODERN RAILWAY HERITAGE
+           ดีไซน์ใหม่: สงบ หรู ใช้งานง่าย และเน้นข้อมูลการเดินทาง
+        ========================================================= */
+        :root {
+            --srt-maroon: #701b24;
+            --srt-maroon-dark: #260d12;
+            --srt-maroon-soft: #f7ecec;
+            --srt-gold: #c6a15b;
+            --srt-blue: #315d76;
+            --srt-green: #287a55;
+            --bg: #f7f4ee;
+            --surface: rgba(255, 255, 255, 0.96);
+            --surface-solid: #ffffff;
+            --text: #20242b;
+            --muted: #6d6a66;
+            --line: rgba(38, 13, 18, 0.10);
+            --shadow-sm: 0 8px 24px rgba(38, 13, 18, 0.07);
+            --shadow-md: 0 18px 50px rgba(38, 13, 18, 0.11);
+            --shadow-lg: 0 34px 90px rgba(38, 13, 18, 0.18);
+            --radius-lg: 26px;
+            --radius-md: 18px;
+            --radius-sm: 12px;
+        }
+
+        body {
+            padding: 0 0 calc(84px + var(--safe-bottom));
+            font-family: 'Noto Sans Thai', 'Sarabun', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            color: var(--text);
+            background:
+                radial-gradient(circle at 4% 4%, rgba(112, 27, 36, 0.07), transparent 25rem),
+                radial-gradient(circle at 95% 18%, rgba(198, 161, 91, 0.10), transparent 28rem),
+                var(--bg);
+        }
+
+        body::before {
+            opacity: 0.18;
+            background-size: 52px 52px;
+            background-image:
+                linear-gradient(rgba(112, 27, 36, 0.035) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(112, 27, 36, 0.035) 1px, transparent 1px);
+        }
+
+        button, input { font: inherit; }
+
+        a:focus-visible,
+        button:focus-visible,
+        input:focus-visible,
+        [tabindex]:focus-visible {
+            outline: 3px solid rgba(198, 161, 91, 0.72);
+            outline-offset: 3px;
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        .icon {
+            width: 22px;
+            height: 22px;
+            flex: 0 0 auto;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 1.8;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .status-strip {
+            position: relative;
+            z-index: 1100;
+            min-height: 34px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 7px 16px;
+            color: #fff;
+            background: var(--srt-maroon-dark);
+            font-size: 12px;
+            line-height: 1.5;
+            text-align: center;
+        }
+
+        .status-strip a {
+            color: #f1d9a6;
+            font-weight: 700;
+            text-underline-offset: 3px;
+        }
+
+        .status-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #5ee49b;
+            box-shadow: 0 0 0 4px rgba(94, 228, 155, 0.14);
+        }
+
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 1050;
+            border-bottom: 1px solid rgba(38, 13, 18, 0.08);
+            background: rgba(250, 247, 241, 0.92);
+            box-shadow: 0 8px 30px rgba(38, 13, 18, 0.06);
+            backdrop-filter: blur(18px) saturate(1.2);
+        }
+
+        .header-shell {
+            width: min(100%, 1280px);
+            min-height: 72px;
+            margin: 0 auto;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .brand {
+            min-width: 0;
+            display: inline-flex;
+            align-items: center;
+            gap: 11px;
+            color: var(--text);
+            text-decoration: none;
+        }
+
+        .brand-mark {
+            position: relative;
+            width: 44px;
+            height: 44px;
+            flex: 0 0 44px;
+            display: grid;
+            place-items: center;
+            border-radius: 13px;
+            color: #fff;
+            background: linear-gradient(145deg, var(--srt-maroon), var(--srt-maroon-dark));
+            box-shadow: 0 10px 24px rgba(112, 27, 36, 0.22);
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 0.06em;
+        }
+
+        .brand-mark::after {
+            content: "";
+            position: absolute;
+            left: 9px;
+            right: 9px;
+            bottom: 8px;
+            height: 2px;
+            border-radius: 999px;
+            background: var(--srt-gold);
+        }
+
+        .brand-copy { min-width: 0; }
+
+        .brand-title {
+            display: block;
+            overflow: hidden;
+            color: var(--srt-maroon-dark);
+            font-size: 15px;
+            font-weight: 800;
+            line-height: 1.25;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .brand-subtitle {
+            display: block;
+            margin-top: 2px;
+            color: var(--muted);
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+        }
+
+        .desktop-nav {
+            display: none;
+            margin-left: auto;
+            align-items: center;
+            gap: 2px;
+        }
+
+        .desktop-nav .nav-btn {
+            width: auto;
+            min-width: 0;
+            min-height: 42px;
+            padding: 9px 10px;
+            border-radius: 12px;
+            flex-direction: row;
+            gap: 7px;
+            color: #625d59;
+            background: transparent;
+            box-shadow: none;
+            font-size: 12px;
+            white-space: nowrap;
+        }
+
+        .desktop-nav .nav-btn .icon { width: 18px; height: 18px; }
+        .desktop-nav .nav-btn:hover { color: var(--srt-maroon); background: #f2e9e5; }
+        .desktop-nav .nav-btn.active {
+            color: var(--srt-maroon);
+            background: #f1e4e2;
+            box-shadow: none;
+        }
+
+        .header-cta {
+            min-height: 42px;
+            margin-left: auto;
+            padding: 10px 15px;
+            border: 0;
+            border-radius: 999px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            color: #fff;
+            background: var(--srt-maroon);
+            box-shadow: 0 10px 22px rgba(112, 27, 36, 0.18);
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .header-cta:hover { background: #5b151d; }
+        .header-cta .icon { width: 17px; height: 17px; }
+
+        .container {
+            max-width: 1280px;
+            padding: clamp(18px, 3vw, 38px);
+        }
+
+        #home.page-section.active { display: block; }
+
+        .hero-banner {
+            min-height: clamp(500px, 57vw, 610px);
+            height: auto;
+            margin-bottom: clamp(28px, 4vw, 48px);
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            border-radius: 30px;
+            background: var(--srt-maroon-dark);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .hero-banner::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            background:
+                linear-gradient(90deg, rgba(20, 6, 9, 0.88) 0%, rgba(38, 13, 18, 0.69) 45%, rgba(38, 13, 18, 0.27) 100%),
+                linear-gradient(0deg, rgba(20, 6, 9, 0.44), transparent 52%);
+        }
+
+        .hero-banner img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: none;
+        }
+
+        .hero-overlay {
+            position: relative;
+            inset: auto;
+            z-index: 1;
+            min-height: inherit;
+            padding: clamp(28px, 5vw, 66px);
+            display: grid;
+            grid-template-columns: minmax(0, 1.1fr) minmax(310px, 0.72fr);
+            align-items: end;
+            gap: clamp(26px, 5vw, 70px);
+            background: none;
+        }
+
+        .hero-copy { align-self: center; max-width: 690px; }
+
+        .hero-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            margin-bottom: 18px;
+            color: #f2d99e;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .hero-eyebrow::before {
+            content: "";
+            width: 28px;
+            height: 1px;
+            background: currentColor;
+        }
+
+        .hero-copy h1 {
+            margin: 0;
+            max-width: 680px;
+            color: #fff;
+            font-size: clamp(36px, 5.4vw, 72px);
+            font-weight: 800;
+            line-height: 1.06;
+            letter-spacing: -0.045em;
+            text-wrap: balance;
+        }
+
+        .hero-copy > p {
+            max-width: 590px;
+            margin: 18px 0 0;
+            color: rgba(255, 255, 255, 0.78);
+            font-size: clamp(15px, 1.5vw, 19px);
+            line-height: 1.75;
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 28px;
+        }
+
+        .primary-btn,
+        .secondary-btn {
+            min-height: 48px;
+            padding: 12px 18px;
+            border: 1px solid transparent;
+            border-radius: 999px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+            text-decoration: none;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .primary-btn {
+            color: var(--srt-maroon-dark);
+            background: #f4dca8;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+        }
+
+        .primary-btn:hover { background: #ffe7b3; transform: translateY(-1px); }
+
+        .secondary-btn {
+            color: #fff;
+            border-color: rgba(255, 255, 255, 0.28);
+            background: rgba(255, 255, 255, 0.10);
+            backdrop-filter: blur(12px);
+        }
+
+        .secondary-btn:hover { background: rgba(255, 255, 255, 0.17); }
+        .primary-btn .icon, .secondary-btn .icon { width: 18px; height: 18px; }
+
+        .next-train-card {
+            width: 100%;
+            align-self: end;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.24);
+            border-radius: 22px;
+            color: #fff;
+            background: rgba(24, 8, 11, 0.70);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25);
+            backdrop-filter: blur(18px) saturate(1.25);
+        }
+
+        .next-train-head {
+            padding: 17px 18px 13px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+        }
+
+        .next-train-title {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            font-size: 14px;
+            font-weight: 800;
+        }
+
+        .schedule-label {
+            color: rgba(255, 255, 255, 0.60);
+            font-size: 10px;
+            font-weight: 600;
+        }
+
+        .next-train-list { padding: 4px 14px 8px; }
+
+        .next-train-row {
+            display: grid;
+            grid-template-columns: 48px minmax(0, 1fr) auto;
+            align-items: center;
+            gap: 12px;
+            padding: 13px 4px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.10);
+        }
+
+        .next-train-row:last-child { border-bottom: 0; }
+
+        .next-train-number {
+            width: 46px;
+            height: 46px;
+            display: grid;
+            place-items: center;
+            border-radius: 13px;
+            color: #f3d89d;
+            background: rgba(255, 255, 255, 0.09);
+            font-size: 14px;
+            font-weight: 800;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .next-train-route { min-width: 0; }
+        .next-train-destination {
+            overflow: hidden;
+            color: #fff;
+            font-size: 13px;
+            font-weight: 700;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .next-train-meta {
+            margin-top: 3px;
+            color: rgba(255, 255, 255, 0.58);
+            font-size: 10px;
+        }
+
+        .next-train-time {
+            color: #fff;
+            font-size: 22px;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .next-train-empty {
+            padding: 24px 10px;
+            color: rgba(255, 255, 255, 0.72);
+            font-size: 12px;
+            text-align: center;
+        }
+
+        .section-heading {
+            margin: 0 0 18px;
+            display: flex;
+            align-items: end;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .section-kicker {
+            margin: 0 0 4px;
+            color: var(--srt-gold);
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+
+        .section-heading h2 {
+            margin: 0;
+            color: var(--srt-maroon-dark);
+            font-size: clamp(22px, 2.4vw, 31px);
+        }
+
+        .section-heading h2::after { display: none; }
+
+        .section-heading p {
+            max-width: 500px;
+            margin: 0;
+            color: var(--muted);
+            font-size: 13px;
+            text-align: right;
+        }
+
+        .online-services {
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 14px;
+            margin-bottom: clamp(28px, 4vw, 50px);
+        }
+
+        .service-link,
+        .service-link[style] {
+            min-height: 154px;
+            padding: 20px;
+            justify-content: flex-start;
+            border: 1px solid rgba(38, 13, 18, 0.09) !important;
+            border-radius: 20px;
+            color: var(--text);
+            background: rgba(255, 255, 255, 0.82) !important;
+            box-shadow: 0 10px 34px rgba(38, 13, 18, 0.06);
+            backdrop-filter: blur(12px);
+        }
+
+        .service-link::after {
+            width: 86px;
+            height: 86px;
+            right: -36px;
+            top: -34px;
+            background: rgba(198, 161, 91, 0.10);
+        }
+
+        .service-link:hover {
+            transform: translateY(-5px);
+            border-color: rgba(112, 27, 36, 0.22) !important;
+            box-shadow: 0 18px 44px rgba(38, 13, 18, 0.11);
+        }
+
+        .service-icon {
+            width: 42px;
+            height: 42px;
+            margin-bottom: 18px;
+            display: grid;
+            place-items: center;
+            border-radius: 13px;
+            color: var(--srt-maroon);
+            background: var(--srt-maroon-soft);
+            font-size: 0;
+        }
+
+        .service-icon .icon { width: 21px; height: 21px; }
+        .service-name, .service-name[style] {
+            color: var(--srt-maroon-dark) !important;
+            font-size: 14px;
+            font-weight: 800;
+        }
+
+        .service-note {
+            margin-top: 5px;
+            color: var(--muted);
+            font-size: 11px;
+            line-height: 1.5;
+        }
+
+        .content-card {
+            overflow: visible;
+            padding: clamp(22px, 3vw, 38px);
+            border: 1px solid rgba(38, 13, 18, 0.08);
+            border-radius: 24px;
+            background: rgba(255, 255, 255, 0.90);
+            box-shadow: var(--shadow-sm);
+            backdrop-filter: blur(15px);
+        }
+
+        .content-card::before {
+            left: clamp(22px, 3vw, 38px);
+            right: auto;
+            width: 42px;
+            height: 3px;
+            border-radius: 0 0 999px 999px;
+            background: var(--srt-gold);
+        }
+
+        h2 {
+            color: var(--srt-maroon-dark);
+            font-size: clamp(22px, 2.3vw, 29px);
+            letter-spacing: -0.025em;
+        }
+
+        h2::after { background: linear-gradient(90deg, rgba(198, 161, 91, 0.42), transparent); }
+
+        .safety-card h2 { justify-content: center; text-align: center; }
+        .safety-card h2::after { display: none; }
+        .safety-intro { text-align: center; color: var(--muted); font-size: 13px; margin: -8px 0 22px; }
+
+        .safety-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 11px;
+        }
+
+        .tip-item {
+            margin: 0;
+            padding: 16px 18px;
+            border: 1px solid rgba(38, 13, 18, 0.08);
+            border-radius: 14px;
+            background: #fff;
+            box-shadow: none;
+            font-size: 14px;
+        }
+
+        .tip-item strong { color: var(--srt-maroon); }
+
+        .search-label {
+            display: block;
+            margin: 2px 0 7px;
+            color: var(--srt-maroon-dark);
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .search-box {
+            min-height: 50px;
+            margin: 0 0 15px;
+            border-color: rgba(38, 13, 18, 0.12);
+            border-radius: 14px;
+            box-shadow: none;
+            font-size: 15px;
+        }
+
+        .search-box:focus {
+            border-color: var(--srt-maroon);
+            box-shadow: 0 0 0 4px rgba(112, 27, 36, 0.09);
+        }
+
+        table {
+            border-color: rgba(38, 13, 18, 0.08);
+            border-radius: 16px;
+            box-shadow: none;
+        }
+
+        th { color: var(--srt-maroon-dark); background: #f5eee9; }
+        tr:hover td { background: #fbf4f0; }
+        .train-type { color: #315d76; background: #edf4f6; }
+
+        .page-section .info-box,
+        .page-section .info-box[style] {
+            border-color: rgba(38, 13, 18, 0.10) !important;
+            background: #fcfaf6 !important;
+            box-shadow: none;
+        }
+
+        .page-section .info-box h3 { color: var(--srt-maroon) !important; border-color: rgba(198, 161, 91, 0.52) !important; }
+
+        .detail-item { border-color: rgba(38, 13, 18, 0.09); }
+        .detail-label { color: var(--muted); }
+        .detail-value { color: var(--srt-maroon-dark); }
+
+        .gallery-item {
+            appearance: none;
+            width: 100%;
+            padding: 0;
+            border: 0;
+            color: inherit;
+            background: transparent;
+            font-family: inherit;
+            text-align: inherit;
+        }
+
+        .gallery-item img { border-radius: 16px; box-shadow: 0 12px 30px rgba(38, 13, 18, 0.10); }
+
+        .stamp-button {
+            appearance: none;
+            width: min(70%, 250px);
+            padding: 0;
+            border: 0;
+            border-radius: 50%;
+            background: transparent;
+            box-shadow: 0 12px 32px rgba(38, 13, 18, 0.14);
+            cursor: zoom-in;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .stamp-button:hover { transform: translateY(-3px); box-shadow: 0 18px 38px rgba(38, 13, 18, 0.19); }
+        .stamp-button img { width: 100%; border-radius: 50%; }
+
+        .expired-promo,
+        .expired-promo[style] {
+            opacity: 0.78;
+            background: #f3f1ed !important;
+        }
+
+        .expired-badge {
+            display: inline-flex;
+            margin-bottom: 10px;
+            padding: 5px 9px;
+            border-radius: 999px;
+            color: #6b625c;
+            background: #e6e1da;
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 0.05em;
+        }
+
+        .moto-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+        .moto-card { margin: 0; border-color: rgba(198, 161, 91, 0.26); background: #fcfaf6; box-shadow: none; }
+        .moto-phone a { color: inherit; text-decoration: none; }
+
+        .site-footer {
+            margin-top: 12px;
+            color: rgba(255, 255, 255, 0.82);
+            background: var(--srt-maroon-dark);
+        }
+
+        .footer-shell {
+            width: min(100%, 1280px);
+            margin: 0 auto;
+            padding: 34px clamp(20px, 4vw, 48px) 28px;
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 34px;
+        }
+
+        .footer-title { margin: 0 0 8px; color: #fff; font-size: 17px; font-weight: 800; }
+        .footer-copy { max-width: 620px; margin: 0; font-size: 12px; line-height: 1.75; }
+        .footer-links { display: flex; flex-wrap: wrap; align-content: start; justify-content: flex-end; gap: 9px; }
+        .footer-links a {
+            padding: 8px 11px;
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            border-radius: 999px;
+            color: #fff;
+            text-decoration: none;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .footer-bottom {
+            width: min(100%, 1280px);
+            margin: 0 auto;
+            padding: 16px clamp(20px, 4vw, 48px) 22px;
+            border-top: 1px solid rgba(255, 255, 255, 0.10);
+            color: rgba(255, 255, 255, 0.54);
+            font-size: 10px;
+            line-height: 1.6;
+        }
+
+        .mobile-nav.nav-menu {
+            position: fixed;
+            inset: auto 0 0;
+            z-index: 1400;
+            display: flex;
+            min-height: 72px;
+            justify-content: space-around;
+            gap: 2px;
+            padding: 7px 5px calc(7px + var(--safe-bottom));
+            border-top: 1px solid rgba(38, 13, 18, 0.10);
+            border-bottom: 0;
+            background: rgba(255, 255, 255, 0.94);
+            box-shadow: 0 -14px 38px rgba(38, 13, 18, 0.12);
+            backdrop-filter: blur(18px) saturate(1.2);
+        }
+
+        .mobile-nav.nav-menu::before { display: none; }
+
+        .mobile-nav .nav-btn {
+            width: 20%;
+            min-width: 0;
+            min-height: 54px;
+            padding: 6px 3px;
+            border-radius: 13px;
+            color: #77706b;
+            background: transparent;
+            box-shadow: none;
+            font-size: 10px;
+            font-weight: 700;
+        }
+
+        .mobile-nav .nav-btn .icon { width: 20px; height: 20px; margin-bottom: 3px; }
+        .mobile-nav .nav-btn.active { color: var(--srt-maroon); background: #f1e5e3; box-shadow: none; }
+
+        .sheet-backdrop {
+            position: fixed;
+            inset: 0;
+            z-index: 1290;
+            border: 0;
+            background: rgba(20, 6, 9, 0.46);
+            backdrop-filter: blur(3px);
+        }
+
+        .more-sheet {
+            position: fixed;
+            left: 10px;
+            right: 10px;
+            bottom: calc(78px + var(--safe-bottom));
+            z-index: 1350;
+            padding: 10px;
+            border: 1px solid rgba(38, 13, 18, 0.10);
+            border-radius: 22px;
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 24px 70px rgba(38, 13, 18, 0.25);
+        }
+
+        .more-sheet[hidden], .sheet-backdrop[hidden] { display: none; }
+
+        .more-sheet-title {
+            margin: 4px 8px 8px;
+            color: var(--muted);
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .more-sheet-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 7px; }
+
+        .more-link {
+            min-height: 86px;
+            padding: 10px 6px;
+            border: 0;
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 7px;
+            color: var(--srt-maroon-dark);
+            background: #f7f2ed;
+            cursor: pointer;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .more-link .icon { width: 21px; height: 21px; color: var(--srt-maroon); }
+
+        #lightbox { background: rgba(20, 6, 9, 0.94); }
+        #lightbox-close { border: 0; }
+
+        @media (min-width: 1050px) {
+            body { padding: 0; }
+            .desktop-nav { display: flex; }
+            .mobile-nav, .more-sheet, .sheet-backdrop { display: none !important; }
+            .header-cta { margin-left: 8px; }
+            .desktop-nav .nav-btn:nth-child(5) .nav-label { display: none; }
+            .page-section.active { min-height: calc(100vh - 106px); }
+        }
+
+        @media (max-width: 1049px) {
+            body { padding-top: 0; }
+            .site-header { top: 0; }
+            .header-shell { min-height: 66px; padding: 9px 15px; }
+            .brand-mark { width: 40px; height: 40px; flex-basis: 40px; }
+            .brand-subtitle { display: none; }
+            .header-cta { margin-left: auto; min-height: 40px; padding: 9px 13px; }
+            .container { padding: 16px; }
+            .hero-overlay { grid-template-columns: minmax(0, 1fr) minmax(290px, 0.7fr); gap: 22px; }
+            .online-services { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        }
+
+        @media (max-width: 760px) {
+            .status-strip { justify-content: flex-start; overflow-x: auto; white-space: nowrap; }
+            .header-cta span { display: none; }
+            .header-cta { width: 40px; padding: 0; }
+            .hero-banner { min-height: 610px; border-radius: 24px; }
+            .hero-banner::after {
+                background:
+                    linear-gradient(0deg, rgba(20, 6, 9, 0.96) 0%, rgba(38, 13, 18, 0.71) 61%, rgba(38, 13, 18, 0.35) 100%);
+            }
+            .hero-overlay {
+                min-height: 610px;
+                padding: 30px 22px 22px;
+                grid-template-columns: 1fr;
+                align-content: end;
+                gap: 24px;
+            }
+            .hero-copy { align-self: end; }
+            .hero-eyebrow { margin-bottom: 12px; }
+            .hero-copy h1 { font-size: clamp(34px, 10vw, 47px); }
+            .hero-copy > p { margin-top: 12px; font-size: 14px; }
+            .hero-actions { margin-top: 20px; }
+            .primary-btn, .secondary-btn { min-height: 44px; padding: 10px 14px; font-size: 12px; }
+            .next-train-card { border-radius: 18px; }
+            .next-train-row:nth-child(n+3) { display: none; }
+            .section-heading { display: block; }
+            .section-heading p { margin-top: 7px; text-align: left; }
+            .online-services { gap: 10px; }
+            .service-link, .service-link[style] { min-height: 145px; padding: 16px; border-radius: 17px; }
+            .service-icon { width: 39px; height: 39px; margin-bottom: 15px; }
+            .service-name, .service-name[style] { font-size: 13px; }
+            .safety-grid { grid-template-columns: 1fr; }
+            .content-card { border-radius: 20px; }
+            .moto-grid { grid-template-columns: 1fr; }
+            .footer-shell { grid-template-columns: 1fr; gap: 20px; }
+            .footer-links { justify-content: flex-start; }
+
+            #tableTime,
+            #tableTime tbody {
+                display: block;
+                min-width: 0;
+                border: 0;
+                background: transparent;
+                box-shadow: none;
+            }
+
+            #tableTime thead { display: none; }
+
+            #tableTime tbody {
+                display: grid;
+                gap: 10px;
+            }
+
+            #tableTime tbody tr {
+                display: grid;
+                grid-template-columns: 58px minmax(0, 1fr) 66px;
+                grid-template-rows: auto auto auto;
+                gap: 2px 10px;
+                padding: 13px;
+                border: 1px solid rgba(38, 13, 18, 0.09);
+                border-radius: 15px;
+                background: #fff;
+                box-shadow: 0 7px 20px rgba(38, 13, 18, 0.05);
+            }
+
+            #tableTime tbody td {
+                border: 0;
+                padding: 2px 0;
+                text-align: left;
+                background: transparent !important;
+                font-size: 11px;
+            }
+
+            #tableTime tbody td:nth-child(1) {
+                grid-column: 1;
+                grid-row: 1 / 4;
+                align-self: stretch;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 12px;
+                color: #fff;
+                background: var(--srt-maroon) !important;
+                font-size: 16px;
+                font-weight: 800;
+            }
+
+            #tableTime tbody td:nth-child(2) { grid-column: 2; grid-row: 1; }
+            #tableTime tbody td:nth-child(3) { grid-column: 2; grid-row: 2; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+            #tableTime tbody td:nth-child(6) { grid-column: 2; grid-row: 3; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 700; }
+            #tableTime tbody td:nth-child(4) { grid-column: 3; grid-row: 2; text-align: right; }
+            #tableTime tbody td:nth-child(5) { grid-column: 3; grid-row: 3; text-align: right; color: var(--srt-maroon); font-size: 15px; font-weight: 800; }
+            #tableTime tbody td:nth-child(3)::before { content: "จาก · "; color: var(--muted); }
+            #tableTime tbody td:nth-child(6)::before { content: "ไป · "; color: var(--muted); font-weight: 500; }
+            #tableTime tbody td:nth-child(4)::before { content: "ถึง "; color: var(--muted); font-size: 9px; }
+            #tableTime tbody td:nth-child(5)::before { content: "ออก "; color: var(--muted); font-size: 9px; font-weight: 500; }
+            #tableTime .train-type { min-width: 0; padding: 3px 7px; font-size: 9px; }
+
+            #tableFare { min-width: 0; }
+            #tableFare th, #tableFare td { padding: 11px 10px; }
+        }
+
+        @media (max-width: 420px) {
+            .brand-title { max-width: 190px; font-size: 13px; }
+            .hero-banner, .hero-overlay { min-height: 630px; }
+            .hero-actions { display: grid; grid-template-columns: 1fr 1fr; }
+            .online-services { grid-template-columns: 1fr 1fr; }
+            .service-link, .service-link[style] { min-height: 137px; padding: 14px; }
+            .next-train-head { padding: 14px; }
+            .next-train-list { padding: 3px 10px 6px; }
+            .next-train-row { grid-template-columns: 44px minmax(0, 1fr) auto; gap: 9px; padding: 11px 2px; }
+            .next-train-number { width: 42px; height: 42px; }
+            .next-train-time { font-size: 19px; }
+            .mobile-nav .nav-btn { font-size: 9px; }
+        }
+
     </style>
 </head>
 <body>
 
-    <div class="header">
-        <div class="header-inner">
-            <div class="header-kicker">🚆 การรถไฟแห่งประเทศไทย • State Railway of Thailand</div>
-            <h1>สถานีรถไฟคลองบางพระ</h1>
-            <p>Khlong Bang Phra Railway Station | ทางรถไฟสายตะวันออก จังหวัดฉะเชิงเทรา</p>
-            <div class="header-chips" aria-label="ข้อมูลสถานีโดยย่อ">
-                <span class="header-chip">รหัสสถานี 3021</span>
-                <span class="header-chip">สายตะวันออก</span>
-                <span class="header-chip">บริการผู้โดยสารและพัสดุ</span>
-            </div>
-        </div>
+    <div class="status-strip" role="status">
+        <span class="status-dot" aria-hidden="true"></span>
+        <span>ข้อมูลในหน้านี้เป็นข้อมูลตามตารางเดินรถ</span>
+        <a href="https://ttsview.railway.co.th" target="_blank" rel="noopener noreferrer">ตรวจสอบสถานะจริงผ่าน TTS</a>
     </div>
 
-    <div class="container">
+    <header class="site-header">
+        <div class="header-shell">
+            <a class="brand" href="#home" onclick="switchPage('home'); return false;" aria-label="กลับหน้าแรก สถานีรถไฟคลองบางพระ">
+                <span class="brand-mark" aria-hidden="true">KBP</span>
+                <span class="brand-copy">
+                    <span class="brand-title">สถานีรถไฟคลองบางพระ</span>
+                    <span class="brand-subtitle">KHLONG BANG PHRA · EASTERN LINE · 3021</span>
+                </span>
+            </a>
+
+            <nav class="desktop-nav" aria-label="เมนูหลัก">
+                <button type="button" class="nav-btn active" data-page="home" onclick="switchPage('home')" aria-current="page"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m3 11 9-8 9 8"/><path d="M5 10v10h14V10"/><path d="M9 20v-6h6v6"/></svg><span class="nav-label">หน้าแรก</span></button>
+                <button type="button" class="nav-btn" data-page="info" onclick="switchPage('info')"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7h.01"/></svg><span class="nav-label">ข้อมูลสถานี</span></button>
+                <button type="button" class="nav-btn" data-page="timetable" onclick="switchPage('timetable')"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span class="nav-label">เวลาเดินรถ</span></button>
+                <button type="button" class="nav-btn" data-page="fares" onclick="switchPage('fares')"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6a2 2 0 0 1 2-2h12v5a3 3 0 0 0 0 6v5H6a2 2 0 0 1-2-2Z"/><path d="M9 8v8"/></svg><span class="nav-label">ค่าโดยสาร</span></button>
+                <button type="button" class="nav-btn" data-page="gallery" onclick="switchPage('gallery')" aria-label="สื่อและประกาศ"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="8.5" cy="9" r="1.5"/><path d="m21 15-5-5L5 20"/></svg><span class="nav-label">สื่อ</span></button>
+                <button type="button" class="nav-btn" data-page="parcels" onclick="switchPage('parcels')"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m4 7 8-4 8 4-8 4Z"/><path d="M4 7v10l8 4 8-4V7M12 11v10"/></svg><span class="nav-label">ส่งพัสดุ</span></button>
+                <button type="button" class="nav-btn" data-page="services" onclick="switchPage('services')"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-5.1 7-12a7 7 0 1 0-14 0c0 6.9 7 12 7 12Z"/><circle cx="12" cy="9" r="2.5"/></svg><span class="nav-label">จุดเชื่อมต่อ</span></button>
+            </nav>
+
+            <button type="button" class="header-cta" onclick="switchPage('timetable')">
+                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+                <span>เช็กขบวนรถ</span>
+            </button>
+        </div>
+    </header>
+
+    <main class="container" id="main-content">
         
         <div id="home" class="page-section active">
             
             <div class="hero-banner">
-                <img src="hero.jpg" alt="บรรยากาศสถานีคลองบางพระ">
+                <img src="hero.jpg" alt="บรรยากาศสถานีรถไฟคลองบางพระ" fetchpriority="high">
                 <div class="hero-overlay">
-                    <h2>ยินดีต้อนรับสู่ สถานีคลองบางพระ</h2>
-                    <p>เดินทางสะดวก ปลอดภัย ใส่ใจบริการ</p>
+                    <div class="hero-copy">
+                        <div class="hero-eyebrow">สถานีรหัส 3021 · ทางรถไฟสายตะวันออก</div>
+                        <h1>การเดินทางที่เรียบง่าย เริ่มต้นที่คลองบางพระ</h1>
+                        <p>ตรวจสอบเวลาเดินรถ ค่าโดยสาร และบริการของสถานีได้ครบในที่เดียว พร้อมวางแผนการเดินทางก่อนออกจากบ้าน</p>
+                        <div class="hero-actions">
+                            <button type="button" class="primary-btn" onclick="switchPage('timetable')">
+                                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+                                ดูเวลาเดินรถ
+                            </button>
+                            <a class="secondary-btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E0%B8%AA%E0%B8%96%E0%B8%B2%E0%B8%99%E0%B8%B5%E0%B8%A3%E0%B8%96%E0%B9%84%E0%B8%9F%E0%B8%84%E0%B8%A5%E0%B8%AD%E0%B8%87%E0%B8%9A%E0%B8%B2%E0%B8%87%E0%B8%9E%E0%B8%A3%E0%B8%B0" target="_blank" rel="noopener noreferrer">
+                                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-5.1 7-12a7 7 0 1 0-14 0c0 6.9 7 12 7 12Z"/><circle cx="12" cy="9" r="2.5"/></svg>
+                                นำทางมาสถานี
+                            </a>
+                        </div>
+                    </div>
+
+                    <aside class="next-train-card" aria-labelledby="nextTrainTitle">
+                        <div class="next-train-head">
+                            <div class="next-train-title" id="nextTrainTitle">
+                                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 15.5V6a3 3 0 0 1 3-3h6a3 3 0 0 1 3 3v9.5"/><path d="M6 12h12M8 20l2-3h4l2 3M8.5 8h.01M15.5 8h.01"/></svg>
+                                ขบวนถัดไป
+                            </div>
+                            <span class="schedule-label">ตามตาราง</span>
+                        </div>
+                        <div class="next-train-list" id="nextTrainList" aria-live="polite">
+                            <div class="next-train-empty">กำลังตรวจสอบตารางเวลา...</div>
+                        </div>
+                    </aside>
                 </div>
             </div>
 
-            <h2 style="border: none; font-size: 17px; margin-bottom: 12px;">💻 บริการออนไลน์</h2>
+            <div class="section-heading">
+                <div>
+                    <p class="section-kicker">QUICK ACCESS</p>
+                    <h2>บริการที่ใช้บ่อย</h2>
+                </div>
+                <p>เข้าถึงบริการสำคัญของการรถไฟฯ ได้อย่างรวดเร็ว</p>
+            </div>
             <div class="online-services">
-                <a href="https://dticket.railway.co.th" target="_blank" class="service-link">
-                    <span class="service-icon">🎫</span>
+                <a href="https://dticket.railway.co.th" target="_blank" rel="noopener noreferrer" class="service-link">
+                    <span class="service-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6a2 2 0 0 1 2-2h12v5a3 3 0 0 0 0 6v5H6a2 2 0 0 1-2-2Z"/><path d="M9 8v8"/></svg></span>
                     <span class="service-name">จองตั๋วออนไลน์ (D-Ticket)</span>
+                    <span class="service-note">จองและชำระเงินผ่านระบบทางการ</span>
                 </a>
-                <a href="https://ttsview.railway.co.th" target="_blank" class="service-link">
-                    <span class="service-icon">🔍</span>
-                    <span class="service-name">เช็คสถานะรถไฟ (TTS)</span>
+                <a href="https://ttsview.railway.co.th" target="_blank" rel="noopener noreferrer" class="service-link">
+                    <span class="service-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg></span>
+                    <span class="service-name">เช็กสถานะรถไฟ (TTS)</span>
+                    <span class="service-note">ตรวจสอบตำแหน่งและความล่าช้า</span>
                 </a>
-                <a href="https://www.railway.co.th" target="_blank" class="service-link">
-                    <span class="service-icon">🌐</span>
-                    <span class="service-name">เว็บการรถไฟฯ (SRT)</span>
+                <a href="https://www.railway.co.th" target="_blank" rel="noopener noreferrer" class="service-link">
+                    <span class="service-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/></svg></span>
+                    <span class="service-name">เว็บไซต์การรถไฟฯ (SRT)</span>
+                    <span class="service-note">ข่าวสารและบริการส่วนกลาง</span>
                 </a>
-                <a href="https://tumwijitaof-commits.github.io/train-booking/" target="_blank" rel="noopener noreferrer" class="service-link" style="border-color: #7b1e22; background: #fff5f5;">
-                    <span class="service-icon">📅</span>
-                    <span class="service-name" style="color: #7b1e22;">เครื่องมือคำนวณวันจองตั๋ว</span>
+                <a href="https://tumwijitaof-commits.github.io/train-booking/" target="_blank" rel="noopener noreferrer" class="service-link">
+                    <span class="service-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></svg></span>
+                    <span class="service-name">คำนวณวันจองตั๋ว</span>
+                    <span class="service-note">วางแผนวันเปิดจำหน่ายล่วงหน้า</span>
                 </a>
             </div>
 
-            <div class="content-card">
-                <h2 style="border: none; text-align: center; font-size: 20px; margin-bottom: 5px;">📢 6 ข้อปฏิบัติเพื่อความปลอดภัย</h2>
-                <p style="text-align: center; color: #7b1e22; font-size: 14px; margin-bottom: 20px;">@สถานีคลองบางพระ</p>
-                
-                <div class="tip-item"><strong>🛑 1. ขึ้น-ลง ฝั่งชานชาลาเท่านั้น:</strong> ปลอดภัย ไม่พลัดตก ไม่เสี่ยงรถสวน</div>
-                <div class="tip-item"><strong>👀 2. ตาดู หูฟัง ไม่รีบข้าม:</strong> มองซ้าย-ขวา ห้ามวิ่งตัดหน้ารถไฟ</div>
-                <div class="tip-item"><strong>🎫 3. เผื่อเวลาซื้อตั๋ว 3 นาที:</strong> เพื่อความรวดเร็วและไม่รีบจนเกิดอุบัติเหตุ</div>
-                <div class="tip-item"><strong>⚠️ 4. ยืนรอหลัง "เส้นเหลือง":</strong> ระวังแรงลมดูดจากขบวนรถที่วิ่งผ่าน</div>
-                <div class="tip-item"><strong>📱 5. ข้ามทาง...งดมือถือ/หูฟัง:</strong> เพื่อพร้อมฟังเสียงเตือนจากขบวนรถ</div>
-                <div class="tip-item"><strong>👨‍👩‍👧‍👦 6. ดูแลเด็กและผู้สูงวัย:</strong> จูงมืออย่างใกล้ชิดขณะขึ้น-ลงและข้ามทาง</div>
+            <div class="content-card safety-card">
+                <h2>6 ข้อปฏิบัติเพื่อความปลอดภัย</h2>
+                <p class="safety-intro">คำแนะนำสำหรับผู้โดยสาร ณ สถานีรถไฟคลองบางพระ</p>
+                <div class="safety-grid">
+                    <div class="tip-item"><strong>01 · ขึ้นและลงฝั่งชานชาลา</strong><br>ลดความเสี่ยงจากการพลัดตกและขบวนรถสวนทาง</div>
+                    <div class="tip-item"><strong>02 · ตาดู หูฟัง ไม่รีบข้าม</strong><br>มองซ้าย–ขวา และไม่วิ่งตัดหน้าขบวนรถ</div>
+                    <div class="tip-item"><strong>03 · เผื่อเวลาซื้อตั๋ว 3 นาที</strong><br>ช่วยให้เดินทางได้สะดวกและไม่ต้องเร่งรีบ</div>
+                    <div class="tip-item"><strong>04 · ยืนรอหลังเส้นเหลือง</strong><br>ระวังแรงลมจากขบวนรถที่วิ่งผ่านสถานี</div>
+                    <div class="tip-item"><strong>05 · งดมือถือและหูฟังขณะข้ามทาง</strong><br>เพื่อให้ได้ยินเสียงเตือนและสังเกตสภาพโดยรอบ</div>
+                    <div class="tip-item"><strong>06 · ดูแลเด็กและผู้สูงอายุใกล้ชิด</strong><br>จูงมือขณะขึ้น ลง และข้ามทางรถไฟทุกครั้ง</div>
+                </div>
             </div>
         </div>
 
         <div id="info" class="page-section">
             <div class="content-card">
-                <h2>🏢 ข้อมูลทั่วไปของสถานี</h2>
+                <h2>ข้อมูลทั่วไปของสถานี</h2>
                 <div class="detail-item"><div class="detail-label">ชื่อสถานี</div><div class="detail-value">สถานีรถไฟคลองบางพระ<br>(Khlong Bang Phra Railway Station)</div></div>
                 <div class="detail-item"><div class="detail-label">ระดับสถานี</div><div class="detail-value">สถานีรถไฟชั้น 4 (มีนายสถานีประจำการ)</div></div>
                 <div class="detail-item"><div class="detail-label">เส้นทาง</div><div class="detail-value">ทางรถไฟสายตะวันออก</div></div>
                 <div class="detail-item"><div class="detail-label">ที่ตั้ง</div><div class="detail-value">อ.เมืองฉะเชิงเทรา จ.ฉะเชิงเทรา 24000</div></div>
 
-                <h2 style="margin-top: 30px;">📏 ข้อมูลทางเทคนิค</h2>
+                <h2 style="margin-top: 30px;">ข้อมูลทางเทคนิค</h2>
                 <div class="detail-item"><div class="detail-label">รหัสสถานี</div><div class="detail-value">3021</div></div>
                 <div class="detail-item"><div class="detail-label">กิโลเมตรที่</div><div class="detail-value">53.99 (จากสถานีกรุงเทพ)</div></div>
                 
-                <h2 style="margin-top: 30px;">🛤️ สถานีข้างเคียง</h2>
+                <h2 style="margin-top: 30px;">สถานีข้างเคียง</h2>
                 <div class="detail-item"><div class="detail-label">ฝั่งขาออกกรุงเทพฯ</div><div class="detail-value">สถานีคลองแขวงกลั่น (กม. 51.02)</div></div>
                 <div class="detail-item"><div class="detail-label">ฝั่งขาเข้าฉะเชิงเทรา</div><div class="detail-value">สถานีบางเตย (กม. 57.10)</div></div>
 
@@ -867,10 +1887,12 @@
                     </p>
                 </div>
 
-                <h2 style="margin-top: 35px;">💮 ตราประทับประจำสถานี</h2>
+                <h2 style="margin-top: 35px;">ตราประทับประจำสถานี</h2>
                 
                 <div style="text-align: center; margin-bottom: 20px;">
-                    <img src="KBPSTAMP.png" alt="ตราประทับสถานีคลองบางพระ" style="width: 70%; max-width: 250px; border-radius: 50%; box-shadow: 0 6px 12px rgba(0,0,0,0.15); cursor: pointer; transition: 0.3s;" onclick="openLightbox('KBPSTAMP.png')">
+                    <button type="button" class="stamp-button" onclick="openLightbox('KBPSTAMP.png', 'ตราประทับสถานีคลองบางพระ')" aria-label="ขยายภาพตราประทับสถานีคลองบางพระ">
+                        <img src="KBPSTAMP.png" alt="ตราประทับสถานีคลองบางพระ" loading="lazy" width="500" height="500">
+                    </button>
                     <p style="font-size: 11px; color: #888; margin-top: 10px;">* แตะที่รูปภาพเพื่อขยายขนาด</p>
                 </div>
 
@@ -879,10 +1901,10 @@
                         ตราประทับของสถานีรถไฟคลองบางพระ เป็นการออกแบบที่ผสมผสานอัตลักษณ์ของการเดินทางด้วยรถไฟ เข้ากับของดีและสถานที่สำคัญของท้องถิ่นจังหวัดฉะเชิงเทราได้อย่างลงตัว โดยแต่ละองค์ประกอบสื่อความหมายดังนี้:
                     </p>
                     <ul style="font-size: 13px; padding-left: 18px; margin-bottom: 15px; color: #444; line-height: 1.6;">
-                        <li><strong>🚆 รถไฟและอักษรย่อ SRT:</strong> สื่อถึงการรถไฟแห่งประเทศไทยโดยตรง เป็นสัญลักษณ์ของการเดินทาง การเชื่อมต่อ และบทบาทของสถานี</li>
-                        <li><strong>🍮 ขนมชั้นบางเตย:</strong> สื่อถึงของฝากและของหวานขึ้นชื่อประจำท้องถิ่น (ตำบลบางเตย) เอกลักษณ์ทางวัฒนธรรมอาหารที่โดดเด่น</li>
-                        <li><strong>🛕 ยอดสถาปัตยกรรมไทยด้านหลัง:</strong> ลายเส้นสื่อถึงพระอุโบสถวัดโสธรวรารามวรวิหาร (วัดหลวงพ่อโสธร) ศูนย์รวมจิตใจและสัญลักษณ์ที่สำคัญที่สุดของจังหวัด</li>
-                        <li><strong>🛤️ เสาโทรเลขและสายไฟริมทาง:</strong> กิมมิคเล็กๆ ที่สะท้อนถึงบรรยากาศความคลาสสิกและวิถีชีวิตริมทางรถไฟ</li>
+                        <li><strong>รถไฟและอักษรย่อ SRT:</strong> สื่อถึงการรถไฟแห่งประเทศไทยโดยตรง เป็นสัญลักษณ์ของการเดินทาง การเชื่อมต่อ และบทบาทของสถานี</li>
+                        <li><strong>ขนมชั้นบางเตย:</strong> สื่อถึงของฝากและของหวานขึ้นชื่อประจำท้องถิ่น (ตำบลบางเตย) เอกลักษณ์ทางวัฒนธรรมอาหารที่โดดเด่น</li>
+                        <li><strong>ยอดสถาปัตยกรรมไทยด้านหลัง:</strong> ลายเส้นสื่อถึงพระอุโบสถวัดโสธรวรารามวรวิหาร (วัดหลวงพ่อโสธร) ศูนย์รวมจิตใจและสัญลักษณ์ที่สำคัญที่สุดของจังหวัด</li>
+                        <li><strong>เสาโทรเลขและสายไฟริมทาง:</strong> กิมมิคเล็กๆ ที่สะท้อนถึงบรรยากาศความคลาสสิกและวิถีชีวิตริมทางรถไฟ</li>
                     </ul>
                     <p style="font-size: 13px; font-weight: bold; color: #7b1e22; margin-bottom: 0; text-align: center; border-top: 1px dashed #f5b041; padding-top: 12px;">
                         "ตราประทับนี้ไม่ได้บอกแค่ว่านี่คือสถานีรถไฟ แต่เป็นการบันทึกเรื่องราวเพื่อสร้างความทรงจำและเอกลักษณ์ที่ดีให้กับผู้มาเยือน"
@@ -895,12 +1917,14 @@
         <div id="timetable" class="page-section">
             <div class="content-card">
                 <h2>ตารางเวลาเดินรถ</h2>
-                <input type="text" id="searchTime" class="search-box" onkeyup="searchTable('searchTime', 'tableTime')" placeholder="🔍 ค้นหาเลขขบวน หรือสถานี...">
-                <p style="font-size: 11px; color: #888; text-align: center; margin-bottom: 15px;">เรียงตามเวลาที่ขบวนรถถึงสถานีคลองบางพระ</p>
+                <label class="search-label" for="searchTime">ค้นหาเลขขบวน ต้นทาง หรือปลายทาง</label>
+                <input type="search" id="searchTime" class="search-box" oninput="searchTable('searchTime', 'tableTime')" placeholder="เช่น 275, กรุงเทพ หรือกบินทร์บุรี" autocomplete="off">
+                <p style="font-size: 11px; color: #77706b; text-align: center; margin-bottom: 15px;">เรียงตามเวลาที่ขบวนรถถึงสถานีคลองบางพระ · โปรดตรวจสอบสถานะกับ TTS หรือสายด่วน 1690 ก่อนเดินทาง</p>
                 <div style="overflow-x:auto;">
                     <table id="tableTime">
+                        <caption class="sr-only">ตารางเวลาเดินรถที่สถานีคลองบางพระ</caption>
                         <thead>
-                            <tr><th>ขบวน</th><th>ประเภท</th><th>ต้นทาง</th><th>ถึง</th><th>ออก</th><th>ปลายทาง</th></tr>
+                            <tr><th scope="col">ขบวน</th><th scope="col">ประเภท</th><th scope="col">ต้นทาง</th><th scope="col">ถึง</th><th scope="col">ออก</th><th scope="col">ปลายทาง</th></tr>
                         </thead>
                         <tbody>
                             <tr><td>384</td><td><span class="train-type">ธรรมดา</span></td><td>ชุมทางฉะเชิงเทรา</td><td><strong>05:29</strong></td><td>05:30</td><td>กรุงเทพ (หัวลำโพง)</td></tr>
@@ -936,16 +1960,16 @@
                 <h2>อัตราค่าโดยสารและหลักเกณฑ์</h2>
                 
                 <div class="info-box">
-                    <h3 style="color: #7b1e22; margin-top: 0; font-size: 16px; margin-bottom: 12px; border-bottom: 2px solid #7b1e22; padding-bottom: 5px;">📌 หลักเกณฑ์การซื้อตั๋ว สิทธิส่วนลด และค่าธรรมเนียม</h3>
+                    <h3 style="color: #7b1e22; margin-top: 0; font-size: 16px; margin-bottom: 12px; border-bottom: 2px solid #7b1e22; padding-bottom: 5px;">หลักเกณฑ์การซื้อตั๋ว สิทธิส่วนลด และค่าธรรมเนียม</h3>
                     
-                    <p style="font-size: 14px; margin: 8px 0 4px 0; font-weight: bold; color: #7b1e22;">📋 ระเบียบปฏิบัติและการตรวจสอบตั๋ว:</p>
+                    <p style="font-size: 14px; margin: 8px 0 4px 0; font-weight: bold; color: #7b1e22;">ระเบียบปฏิบัติและการตรวจสอบตั๋ว:</p>
                     <ul style="font-size: 13px; padding-left: 18px; margin-bottom: 10px; color: #444; line-height: 1.6;">
                         <li><strong>โปรดซื้อตั๋วก่อนขบวนรถออกอย่างน้อย 3 นาที</strong> เพื่อความปลอดภัยและการตรวจสอบสิทธิในการเดินทาง</li>
                         <li>ตั๋วโดยสาร <strong>ไป-กลับ ทุกขบวน</strong> และ <strong>ขบวนรถปรับอากาศ</strong> กรุณาแสดงบัตรประชาชน หรือ Passport (1 คน ต่อ 1 ตั๋ว)</li>
-                        <li><strong>⚠️ ข้อควรระวัง:</strong> เมื่อซื้อตั๋วแล้วควรตรวจสอบ ขบวนรถ, วันที่, สถานีต้นทาง-ปลายทาง และจำนวนเงินทอนทันที <em>เมื่อพ้นจากที่จำหน่ายตั๋วแล้วภายหลัง พนักงานจะไม่รับผิดชอบใด ๆ ทั้งสิ้น</em></li>
+                        <li><strong>ข้อควรระวัง:</strong> เมื่อซื้อตั๋วแล้วควรตรวจสอบ ขบวนรถ, วันที่, สถานีต้นทาง-ปลายทาง และจำนวนเงินทอนทันที <em>เมื่อพ้นจากที่จำหน่ายตั๋วแล้วภายหลัง พนักงานจะไม่รับผิดชอบใด ๆ ทั้งสิ้น</em></li>
                     </ul>
                     
-                    <p style="font-size: 14px; margin: 8px 0 4px 0; font-weight: bold; color: #7b1e22;">🎫 การลดค่าโดยสารครึ่งราคา (ลดร้อยละ 50):</p>
+                    <p style="font-size: 14px; margin: 8px 0 4px 0; font-weight: bold; color: #7b1e22;">การลดค่าโดยสารครึ่งราคา (ลดร้อยละ 50):</p>
                     <ul style="font-size: 13px; padding-left: 18px; margin-bottom: 10px; color: #444; line-height: 1.6;">
                         <li><strong>เด็ก:</strong> ส่วนสูงเกิน 100 ซม. แต่ไม่เกิน 150 ซม.</li>
                         <li><strong>พระภิกษุ สามเณร:</strong> ในศาสนาพุทธ หรือนักบุญในศาสนาอิสลามและคริสต์</li>
@@ -954,18 +1978,18 @@
                         <li><strong>ผู้สูงอายุ (60 ปีขึ้นไป) สัญชาติไทย:</strong> (ลดเฉพาะช่วง 01 มิ.ย. - 30 ก.ย. ของทุกปี)</li>
                     </ul>
 
-                    <p style="font-size: 14px; margin: 8px 0 4px 0; font-weight: bold; color: #7b1e22;">♿ ส่วนลดคนพิการ (เริ่ม 1 ก.ค. 2567):</p>
+                    <p style="font-size: 14px; margin: 8px 0 4px 0; font-weight: bold; color: #7b1e22;">ส่วนลดคนพิการ (เริ่ม 1 ก.ค. 2567):</p>
                     <ul style="font-size: 13px; padding-left: 18px; margin-bottom: 10px; color: #444; line-height: 1.6;">
                         <li><strong>คนพิการ (สัญชาติไทย):</strong> ลดเฉพาะค่าโดยสารร้อยละ 50 ทุกชั้นตลอดสาย (ไม่รวมค่าธรรมเนียม)</li>
                         <li><strong>ผู้ติดตามคนพิการ (1 คน):</strong> ลดเฉพาะค่าโดยสารร้อยละ 25 (ไม่รวมค่าธรรมเนียม)</li>
                     </ul>
 
-                    <p style="font-size: 14px; margin: 8px 0 4px 0; font-weight: bold; color: #7b1e22;">🎖 สิทธิอาสาสมัคร (อสม.):</p>
+                    <p style="font-size: 14px; margin: 8px 0 4px 0; font-weight: bold; color: #7b1e22;">สิทธิอาสาสมัคร (อสม.):</p>
                     <ul style="font-size: 13px; padding-left: 18px; margin-bottom: 10px; color: #444; line-height: 1.6;">
                         <li>ลดค่าโดยสารเฉพาะชั้น 3 รถนั่งธรรมดา ร้อยละ 20 (เฉพาะช่วง 01 มิ.ย. - 30 ก.ย. ของทุกปี)</li>
                     </ul>
 
-                    <p style="font-size: 14px; margin: 8px 0 4px 0; font-weight: bold; color: #d32f2f;">🚨 ค่าธรรมเนียมบนขบวนรถ (กรณีไม่มีตั๋ว):</p>
+                    <p style="font-size: 14px; margin: 8px 0 4px 0; font-weight: bold; color: #d32f2f;">ค่าธรรมเนียมบนขบวนรถ (กรณีไม่มีตั๋ว):</p>
                     <ul style="font-size: 13px; padding-left: 18px; margin-bottom: 5px; color: #444; line-height: 1.6;">
                         <li>ขบวนรถด่วนพิเศษ, รถด่วน, และรถเร็ว: <strong>คนละ 250 บาท</strong></li>
                         <li>ขบวนรถประเภทอื่น ๆ นอกเหนือจากข้อ 1: <strong>คนละ 100 บาท</strong></li>
@@ -973,10 +1997,12 @@
                     </ul>
                 </div>
 
-                <input type="text" id="searchFare" class="search-box" onkeyup="searchTable('searchFare', 'tableFare')" placeholder="🔍 พิมพ์ชื่อสถานีปลายทางเพื่อค้นหา...">
+                <label class="search-label" for="searchFare">ค้นหาค่าโดยสารจากสถานีคลองบางพระ</label>
+                <input type="search" id="searchFare" class="search-box" oninput="searchTable('searchFare', 'tableFare')" placeholder="พิมพ์ชื่อสถานีปลายทาง" autocomplete="off">
                 <div style="overflow-x:auto;">
                     <table id="tableFare">
-                        <thead><tr><th>สถานีปลายทาง</th><th>ราคา (บาท)</th></tr></thead>
+                        <caption class="sr-only">ตารางค่าโดยสารชั้นสามจากสถานีคลองบางพระ</caption>
+                        <thead><tr><th scope="col">สถานีปลายทาง</th><th scope="col">ราคา (บาท)</th></tr></thead>
                         <tbody>
                             <tr><td colspan="2" class="route-title">สายกรุงเทพ (หัวลำโพง)</td></tr>
                             <tr><td>คลองแขวงกลั่น</td><td>2</td></tr><tr><td>คลองเปรง</td><td>2</td></tr><tr><td>คลองอุดมชลจร</td><td>2</td></tr><tr><td>คลองหลวงแพ่ง</td><td>3</td></tr><tr><td>หัวตะเข้</td><td>5</td></tr><tr><td>พระจอมเกล้า</td><td>5</td></tr><tr><td>ลาดกระบัง</td><td>6</td></tr><tr><td>ซอยวัดลานบุญ</td><td>6</td></tr><tr><td>บ้านทับช้าง</td><td>7</td></tr><tr><td>หัวหมาก</td><td>8</td></tr><tr><td>สุขุมวิท 71</td><td>9</td></tr><tr><td>คลองตัน</td><td>9</td></tr><tr><td>อโศก</td><td>10</td></tr><tr><td>มักกะสัน</td><td>11</td></tr><tr><td>พญาไท</td><td>11</td></tr><tr><td>อุรุพงษ์</td><td>11</td></tr><tr><td>ยมราช</td><td>12</td></tr><tr><td>กรุงเทพ (หัวลำโพง)</td><td>12</td></tr>
@@ -994,34 +2020,34 @@
 
         <div id="gallery" class="page-section">
             <div class="content-card">
-                <h2>🖼️ สื่อประชาสัมพันธ์</h2>
+                <h2>สื่อประชาสัมพันธ์</h2>
                 <p style="text-align: center; color: #666; font-size: 14px; margin-bottom: 20px;">รวมประกาศและข้อมูลสำคัญในรูปแบบภาพ</p>
                 
                 <div class="gallery-grid">
-                    <div class="gallery-item" onclick="openLightbox('SRT1.png')">
-                        <img src="SRT1.png" alt="SRT Express">
+                    <button type="button" class="gallery-item" onclick="openLightbox('SRT1.png', 'โปรโมชั่นส่งพัสดุ')">
+                        <img src="SRT1.png" alt="SRT Express" loading="lazy" width="900" height="1200">
                         <p class="gallery-title">โปรโมชั่นส่งพัสดุ</p>
-                    </div>
-                    <div class="gallery-item" onclick="openLightbox('SRT2.png')">
-                        <img src="SRT2.png" alt="บริการห่อวัตถุด่วน">
+                    </button>
+                    <button type="button" class="gallery-item" onclick="openLightbox('SRT2.png', 'อัตราค่าระวางพัสดุ')">
+                        <img src="SRT2.png" alt="บริการห่อวัตถุด่วน" loading="lazy" width="900" height="1200">
                         <p class="gallery-title">อัตราค่าระวางพัสดุ</p>
-                    </div>
-                    <div class="gallery-item" onclick="openLightbox('SRT3.png')">
-                        <img src="SRT3.png" alt="6 ข้อปฏิบัติ">
+                    </button>
+                    <button type="button" class="gallery-item" onclick="openLightbox('SRT3.png', '6 ข้อปฏิบัติความปลอดภัย')">
+                        <img src="SRT3.png" alt="6 ข้อปฏิบัติ" loading="lazy" width="900" height="1200">
                         <p class="gallery-title">6 ข้อปฏิบัติความปลอดภัย</p>
-                    </div>
-                    <div class="gallery-item" onclick="openLightbox('SRT4.png')">
-                        <img src="SRT4.png" alt="อัปเดตบริการขนส่งพัสดุ">
+                    </button>
+                    <button type="button" class="gallery-item" onclick="openLightbox('SRT4.png', 'ขั้นตอนส่งพัสดุ')">
+                        <img src="SRT4.png" alt="อัปเดตบริการขนส่งพัสดุ" loading="lazy" width="900" height="1200">
                         <p class="gallery-title">ขั้นตอนส่งพัสดุ</p>
-                    </div>
-                    <div class="gallery-item" onclick="openLightbox('SRT5.png')">
-                        <img src="SRT5.png" alt="เดินทางบ่อยแค่ไหนก็คุ้ม">
+                    </button>
+                    <button type="button" class="gallery-item" onclick="openLightbox('SRT5.png', 'ตั๋วโดยสารรายเดือน')">
+                        <img src="SRT5.png" alt="เดินทางบ่อยแค่ไหนก็คุ้ม" loading="lazy" width="900" height="1200">
                         <p class="gallery-title">ตั๋วโดยสารรายเดือน</p>
-                    </div>
-                    <div class="gallery-item" onclick="openLightbox('SRT6.png')">
-                        <img src="SRT6.png" alt="ประกาศสถานีคลองบางพระ">
+                    </button>
+                    <button type="button" class="gallery-item" onclick="openLightbox('SRT6.png', 'ประกาศสถานีคลองบางพระ')">
+                        <img src="SRT6.png" alt="ประกาศสถานีคลองบางพระ" loading="lazy" width="900" height="1200">
                         <p class="gallery-title">ประกาศสถานี</p>
-                    </div>
+                    </button>
                 </div>
                 <p style="text-align: center; font-size: 11px; color: #888; margin-top: 20px;">* แตะที่รูปภาพเพื่อขยายขนาด</p>
             </div>
@@ -1029,25 +2055,25 @@
 
         <div id="parcels" class="page-section">
             <div class="content-card">
-                <h2>📦 บริการขนส่งพัสดุและสัมภาระ</h2>
+                <h2>บริการขนส่งพัสดุและสัมภาระ</h2>
 
                 <div class="info-box" style="background-color: #e3f2fd; border-color: #90caf9;">
-                    <h3 style="color: #1565c0; margin-top: 0; font-size: 16px; border-bottom: 2px solid #90caf9; padding-bottom: 8px;">⏱️ รอบเวลารับส่งพัสดุ (เฉพาะสถานีคลองบางพระ)</h3>
-                    <p style="font-size: 13px; color: #d32f2f; font-weight: bold; margin-bottom: 10px;">⚠️ กรุณานำพัสดุมาส่งที่สถานีก่อนเวลารถออกอย่างน้อย 30 นาที</p>
+                    <h3 style="color: #1565c0; margin-top: 0; font-size: 16px; border-bottom: 2px solid #90caf9; padding-bottom: 8px;">รอบเวลารับส่งพัสดุ (เฉพาะสถานีคลองบางพระ)</h3>
+                    <p style="font-size: 13px; color: #d32f2f; font-weight: bold; margin-bottom: 10px;">กรุณานำพัสดุมาส่งที่สถานีก่อนเวลารถออกอย่างน้อย 30 นาที</p>
                     
-                    <p style="font-size: 14px; margin: 8px 0 4px 0; font-weight: bold; color: #1565c0;">🔹 สายจุกเสม็ด:</p>
+                    <p style="font-size: 14px; margin: 8px 0 4px 0; font-weight: bold; color: #1565c0;">สายจุกเสม็ด:</p>
                     <ul style="font-size: 13px; padding-left: 18px; margin-bottom: 10px; color: #444;">
                         <li>ส่งได้ 1 รอบ/วัน: เวลา <strong>08:46 น.</strong></li>
                     </ul>
 
-                    <p style="font-size: 14px; margin: 8px 0 4px 0; font-weight: bold; color: #1565c0;">🔹 สายปราจีนบุรี / กบินทร์บุรี / ด่านพรมแดนบ้านคลองลึก:</p>
+                    <p style="font-size: 14px; margin: 8px 0 4px 0; font-weight: bold; color: #1565c0;">สายปราจีนบุรี / กบินทร์บุรี / ด่านพรมแดนบ้านคลองลึก:</p>
                     <ul style="font-size: 13px; padding-left: 18px; margin-bottom: 10px; color: #444;">
                         <li>ขบวน 275: เวลา <strong>07:28 น.</strong></li>
                         <li>ขบวน 279: เวลา <strong>14:08 น.</strong></li>
                         <li>ขบวน 277: เวลา <strong>16:37 น.</strong> <span style="color: #d32f2f;">(ปลายทางสิ้นสุดแค่สถานีกบินทร์บุรี)</span></li>
                     </ul>
 
-                    <p style="font-size: 14px; margin: 8px 0 4px 0; font-weight: bold; color: #1565c0;">🔹 สายเข้ากรุงเทพ (หัวลำโพง):</p>
+                    <p style="font-size: 14px; margin: 8px 0 4px 0; font-weight: bold; color: #1565c0;">สายเข้ากรุงเทพ (หัวลำโพง):</p>
                     <ul style="font-size: 13px; padding-left: 18px; margin-bottom: 0; color: #444;">
                         <li>ขบวน 278: เวลา <strong>08:41 น.</strong></li>
                         <li>ขบวน 280: เวลา <strong>10:33 น.</strong></li>
@@ -1055,9 +2081,10 @@
                     </ul>
                 </div>
                 
-                <div class="info-box" style="background-color: #fff5f5; border-color: #ffcdd2;">
-                    <h3 style="color: #d32f2f; margin-top: 0; font-size: 16px; border-bottom: 2px solid #ffcdd2; padding-bottom: 8px;">🔥 โปรโมชั่น SRT Express (One Price)</h3>
-                    <p style="font-size: 13px; color: #555; margin-bottom: 10px;">บริการส่งพัสดุวันเดียวถึง สินค้าขนาดเล็กแบบ "ราคาเดียว" สะดวก รวดเร็ว ส่งได้ทั้งเส้นทางเดียวกันและข้ามสายรถไฟ <br>(โปรโมชั่น: 1 พฤษภาคม 2569 - 31 กรกฎาคม 2569)</p>
+                <div class="info-box expired-promo">
+                    <span class="expired-badge">สิ้นสุดโปรโมชั่นแล้ว</span>
+                    <h3 style="margin-top: 0; font-size: 16px; border-bottom: 2px solid #ddd; padding-bottom: 8px;">SRT Express (One Price)</h3>
+                    <p style="font-size: 13px; color: #555; margin-bottom: 10px;">ข้อมูลโปรโมชั่นเดิมสำหรับบริการส่งพัสดุขนาดเล็กแบบราคาเดียว ระหว่างวันที่ 1 พฤษภาคม–31 กรกฎาคม 2569</p>
                     <ul style="font-size: 13px; padding-left: 18px; margin-bottom: 10px; color: #444; line-height: 1.6;">
                         <li><strong>เงื่อนไข:</strong> น้ำหนักไม่เกิน 2 กิโลกรัม/ชิ้น และ ขนาดไม่เกิน 50x50x50 ซม.</li>
                         <li><strong>ส่งสายเดียวกัน:</strong> 60 บาท/ชิ้น <span style="color:#7b1e22;">(เช่น จากคลองบางพระ ➡ กรุงเทพฯ)</span></li>
@@ -1076,7 +2103,7 @@
                         <p style="margin: 5px 0 0 0; font-size: 13px; color: #555;">ระยะเวลาจัดส่งไว ด่วนภายใน 1 วัน</p>
                     </div>
 
-                    <p style="font-size: 14px; font-weight: bold; color: #7b1e22; margin-top: 15px;">📌 4 ขั้นตอนง่ายๆ ในการส่งพัสดุ:</p>
+                    <p style="font-size: 14px; font-weight: bold; color: #7b1e22; margin-top: 15px;">4 ขั้นตอนง่ายๆ ในการส่งพัสดุ:</p>
                     <div class="step-box">
                         <div class="step-num">1</div>
                         <div>
@@ -1107,12 +2134,12 @@
                     </div>
 
                     <div style="background-color: #fff; padding: 10px; border-left: 4px solid #f57c00; margin-top: 15px; font-size: 12px; color: #666;">
-                        <strong>📢 หมายเหตุ:</strong> การรถไฟแห่งประเทศไทยขออภัยในความไม่สะดวกจากการปรับเปลี่ยนรูปแบบบริการในครั้งนี้ และขอขอบคุณผู้ใช้บริการทุกท่าน
+                        <strong>หมายเหตุ:</strong> การรถไฟแห่งประเทศไทยขออภัยในความไม่สะดวกจากการปรับเปลี่ยนรูปแบบบริการในครั้งนี้ และขอขอบคุณผู้ใช้บริการทุกท่าน
                     </div>
                 </div>
 
                 <div class="info-box">
-                    <h3 style="color: #7b1e22; margin-top: 0; font-size: 16px; border-bottom: 2px solid #7b1e22; padding-bottom: 8px;">📌 บริการขนส่งสินค้าห่อวัตถุด่วน (Station To Door)</h3>
+                    <h3 style="color: #7b1e22; margin-top: 0; font-size: 16px; border-bottom: 2px solid #7b1e22; padding-bottom: 8px;">บริการขนส่งสินค้าห่อวัตถุด่วน (Station To Door)</h3>
                     <p style="font-size: 13px; color: #444; margin-bottom: 5px;">บริการรับขนส่งหีบห่อวัตถุ</p>
                     <p style="font-size: 12px; color: #d32f2f; font-weight: bold; background: #ffebee; padding: 8px; border-radius: 5px; display: inline-block;">การคิดค่าระวาง = อัตราค่าระวางด่วน + ค่าธรรมเนียม 50% ของอัตราค่าระวางด่วน (สินค้าทั่วไปขั้นต่ำ 60 บาท)</p>
 
@@ -1133,9 +2160,9 @@
                     </ul>
                 </div>
 
-                <div style="background-color: #b71c1c; color: white; text-align: center; padding: 15px; border-radius: 8px; margin-top: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                <div style="background-color: #701b24; color: white; text-align: center; padding: 15px; border-radius: 14px; margin-top: 20px; box-shadow: 0 8px 24px rgba(38,13,18,0.12);">
                     <p style="margin: 0; font-size: 15px; font-weight: bold; letter-spacing: 0.5px;">
-                        📞 สอบถามข้อมูลเพิ่มเติมได้ที่สถานีรถไฟทั่วประเทศ หรือ โทร 1690
+                        สอบถามข้อมูลเพิ่มเติมได้ที่สถานีรถไฟทั่วประเทศ หรือ <a href="tel:1690" style="color:#f4dca8;">โทร 1690</a>
                     </p>
                 </div>
             </div>
@@ -1145,39 +2172,104 @@
             <div class="content-card">
                 <h2>บริการรถรับจ้าง</h2>
                 <p style="text-align: center; color: #666; margin-bottom: 20px;">คิววินมอเตอร์ไซค์ประจำสถานีคลองบางพระ</p>
-                <div class="moto-card"><p style="margin:0;">ติดต่อ พี่วัก</p><div class="moto-phone">📞 095-476-9351</div></div>
-                <div class="moto-card"><p style="margin:0;">ติดต่อ พี่เกษม</p><div class="moto-phone">📞 093-557-8749</div></div>
+                <div class="moto-grid">
+                    <div class="moto-card"><p style="margin:0;">ติดต่อ พี่วัก</p><div class="moto-phone"><a href="tel:0954769351">095-476-9351</a></div></div>
+                    <div class="moto-card"><p style="margin:0;">ติดต่อ พี่เกษม</p><div class="moto-phone"><a href="tel:0935578749">093-557-8749</a></div></div>
+                </div>
             </div>
         </div>
 
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-shell">
+            <div>
+                <p class="footer-title">สถานีรถไฟคลองบางพระ</p>
+                <p class="footer-copy">สถานีรหัส 3021 · ทางรถไฟสายตะวันออก · อำเภอเมืองฉะเชิงเทรา จังหวัดฉะเชิงเทรา ข้อมูลเวลาและค่าโดยสารอาจมีการเปลี่ยนแปลง โปรดตรวจสอบกับเจ้าหน้าที่หรือสายด่วน 1690 ก่อนเดินทาง</p>
+            </div>
+            <div class="footer-links">
+                <a href="https://ttsview.railway.co.th" target="_blank" rel="noopener noreferrer">สถานะขบวนรถ</a>
+                <a href="https://dticket.railway.co.th" target="_blank" rel="noopener noreferrer">D-Ticket</a>
+                <a href="tel:1690">สายด่วน 1690</a>
+            </div>
+        </div>
+        <div class="footer-bottom">เว็บไซต์ข้อมูลเพื่ออำนวยความสะดวกแก่ผู้โดยสารสถานีคลองบางพระ · Khlong Bang Phra Railway Station</div>
+    </footer>
+
+    <button type="button" class="sheet-backdrop" id="sheetBackdrop" onclick="closeMoreMenu()" aria-label="ปิดเมนูเพิ่มเติม" hidden></button>
+
+    <div class="more-sheet" id="moreSheet" aria-label="เมนูเพิ่มเติม" hidden>
+        <p class="more-sheet-title">บริการเพิ่มเติม</p>
+        <div class="more-sheet-grid">
+            <button type="button" class="more-link" onclick="switchPage('info')"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7h.01"/></svg>ข้อมูลสถานี</button>
+            <button type="button" class="more-link" onclick="switchPage('gallery')"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="8.5" cy="9" r="1.5"/><path d="m21 15-5-5L5 20"/></svg>สื่อและประกาศ</button>
+            <button type="button" class="more-link" onclick="switchPage('services')"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-5.1 7-12a7 7 0 1 0-14 0c0 6.9 7 12 7 12Z"/><circle cx="12" cy="9" r="2.5"/></svg>จุดเชื่อมต่อ</button>
+        </div>
     </div>
 
-    <nav class="nav-menu">
-        <button class="nav-btn active" onclick="switchPage('home', this)"><span class="nav-icon">🏠</span> หน้าแรก</button>
-        <button class="nav-btn" onclick="switchPage('info', this)"><span class="nav-icon">🏢</span> ข้อมูลสถานี</button>
-        <button class="nav-btn" onclick="switchPage('timetable', this)"><span class="nav-icon">⏰</span> เวลาเดินรถ</button>
-        <button class="nav-btn" onclick="switchPage('fares', this)"><span class="nav-icon">🎫</span> ค่าโดยสาร</button>
-        <button class="nav-btn" onclick="switchPage('gallery', this)"><span class="nav-icon">🖼️</span> สื่อ/ประกาศ</button>
-        <button class="nav-btn" onclick="switchPage('parcels', this)"><span class="nav-icon">📦</span> ส่งพัสดุ</button>
-        <button class="nav-btn" onclick="switchPage('services', this)"><span class="nav-icon">🛵</span> จุดเชื่อมต่อ</button>
+    <nav class="nav-menu mobile-nav" aria-label="เมนูมือถือ">
+        <button type="button" class="nav-btn active" data-page="home" onclick="switchPage('home')" aria-current="page"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m3 11 9-8 9 8"/><path d="M5 10v10h14V10"/><path d="M9 20v-6h6v6"/></svg>หน้าแรก</button>
+        <button type="button" class="nav-btn" data-page="timetable" onclick="switchPage('timetable')"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>เวลาเดินรถ</button>
+        <button type="button" class="nav-btn" data-page="fares" onclick="switchPage('fares')"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6a2 2 0 0 1 2-2h12v5a3 3 0 0 0 0 6v5H6a2 2 0 0 1-2-2Z"/><path d="M9 8v8"/></svg>ค่าโดยสาร</button>
+        <button type="button" class="nav-btn" data-page="parcels" onclick="switchPage('parcels')"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m4 7 8-4 8 4-8 4Z"/><path d="M4 7v10l8 4 8-4V7M12 11v10"/></svg>ส่งพัสดุ</button>
+        <button type="button" class="nav-btn" id="moreNavButton" onclick="toggleMoreMenu()" aria-expanded="false" aria-controls="moreSheet"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/></svg>เพิ่มเติม</button>
     </nav>
 
-    <div id="lightbox" onclick="closeLightbox()">
-        <span id="lightbox-close">&times;</span>
-        <img id="lightbox-img" src="">
+    <div id="lightbox" role="dialog" aria-modal="true" aria-label="ภาพขยาย" onclick="closeLightbox(event)" hidden>
+        <button type="button" id="lightbox-close" onclick="closeLightbox(event)" aria-label="ปิดภาพขยาย">&times;</button>
+        <img id="lightbox-img" src="" alt="" onclick="event.stopPropagation()">
     </div>
 
     <script>
-        function switchPage(pageId, btnElement) {
-            document.querySelectorAll('.page-section').forEach(sec => sec.classList.remove('active'));
-            const target = document.getElementById(pageId);
-            if (target) target.classList.add('active');
+        const morePages = new Set(['info', 'gallery', 'services']);
+        let lightboxReturnFocus = null;
 
-            document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
-            if (btnElement) btnElement.classList.add('active');
+        function switchPage(pageId) {
+            const target = document.getElementById(pageId);
+            if (!target || !target.classList.contains('page-section')) return;
+
+            document.querySelectorAll('.page-section').forEach(section => {
+                section.classList.toggle('active', section.id === pageId);
+            });
+
+            document.querySelectorAll('.nav-btn[data-page]').forEach(button => {
+                const isActive = button.dataset.page === pageId;
+                button.classList.toggle('active', isActive);
+                if (isActive) button.setAttribute('aria-current', 'page');
+                else button.removeAttribute('aria-current');
+            });
+
+            const moreButton = document.getElementById('moreNavButton');
+            if (moreButton) moreButton.classList.toggle('active', morePages.has(pageId));
 
             if (history.replaceState) history.replaceState(null, '', '#' + pageId);
+            closeMoreMenu();
             window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function toggleMoreMenu() {
+            const sheet = document.getElementById('moreSheet');
+            const backdrop = document.getElementById('sheetBackdrop');
+            const button = document.getElementById('moreNavButton');
+            if (!sheet || !backdrop || !button) return;
+
+            const shouldOpen = sheet.hidden;
+            sheet.hidden = !shouldOpen;
+            backdrop.hidden = !shouldOpen;
+            button.setAttribute('aria-expanded', String(shouldOpen));
+            document.body.classList.toggle('more-open', shouldOpen);
+
+            if (shouldOpen) sheet.querySelector('button')?.focus();
+        }
+
+        function closeMoreMenu() {
+            const sheet = document.getElementById('moreSheet');
+            const backdrop = document.getElementById('sheetBackdrop');
+            const button = document.getElementById('moreNavButton');
+            if (sheet) sheet.hidden = true;
+            if (backdrop) backdrop.hidden = true;
+            if (button) button.setAttribute('aria-expanded', 'false');
+            document.body.classList.remove('more-open');
         }
 
         function searchTable(inputId, tableId) {
@@ -1210,34 +2302,112 @@
             if (currentTitle && filter) currentTitle.style.display = visibleCountInGroup ? '' : 'none';
         }
 
-        function openLightbox(imageSrc) {
+        function openLightbox(imageSrc, imageAlt = 'ภาพประชาสัมพันธ์') {
             const lightbox = document.getElementById('lightbox');
             const image = document.getElementById('lightbox-img');
             if (!lightbox || !image) return;
+            lightboxReturnFocus = document.activeElement;
             image.src = imageSrc;
+            image.alt = imageAlt;
+            lightbox.hidden = false;
             lightbox.style.display = 'flex';
             document.body.style.overflow = 'hidden';
+            document.getElementById('lightbox-close')?.focus();
         }
 
-        function closeLightbox() {
+        function closeLightbox(event) {
             const lightbox = document.getElementById('lightbox');
             if (!lightbox) return;
+            if (event && event.currentTarget === lightbox && event.target !== lightbox) return;
             lightbox.style.display = 'none';
+            lightbox.hidden = true;
             document.body.style.overflow = '';
+            if (lightboxReturnFocus instanceof HTMLElement) lightboxReturnFocus.focus();
+            lightboxReturnFocus = null;
+        }
+
+        function getBangkokMinutes() {
+            const parts = new Intl.DateTimeFormat('en-GB', {
+                timeZone: 'Asia/Bangkok',
+                hour: '2-digit',
+                minute: '2-digit',
+                hourCycle: 'h23'
+            }).formatToParts(new Date());
+
+            const hour = Number(parts.find(part => part.type === 'hour')?.value || 0);
+            const minute = Number(parts.find(part => part.type === 'minute')?.value || 0);
+            return (hour * 60) + minute;
+        }
+
+        function renderNextTrains() {
+            const list = document.getElementById('nextTrainList');
+            const rows = Array.from(document.querySelectorAll('#tableTime tbody tr'));
+            if (!list || !rows.length) return;
+
+            const trains = rows.map(row => {
+                const cells = row.querySelectorAll('td');
+                const departure = cells[4]?.textContent.trim() || '';
+                const [hour, minute] = departure.split(':').map(Number);
+                const trainNumber = cells[0]?.textContent.trim() || '';
+                return {
+                    trainNumber,
+                    arrival: cells[3]?.textContent.trim() || '',
+                    departure,
+                    destination: cells[5]?.textContent.trim() || '',
+                    platform: Number(trainNumber) % 2 === 0 ? 3 : 2,
+                    minutes: (hour * 60) + minute
+                };
+            }).filter(train => Number.isFinite(train.minutes));
+
+            const currentMinutes = getBangkokMinutes();
+            let upcoming = trains.filter(train => train.minutes >= currentMinutes).slice(0, 3);
+            let isTomorrow = false;
+
+            if (!upcoming.length) {
+                upcoming = trains.slice(0, 3);
+                isTomorrow = true;
+            }
+
+            list.replaceChildren();
+            upcoming.forEach(train => {
+                const row = document.createElement('div');
+                row.className = 'next-train-row';
+
+                const number = document.createElement('div');
+                number.className = 'next-train-number';
+                number.textContent = train.trainNumber;
+
+                const route = document.createElement('div');
+                route.className = 'next-train-route';
+                const destination = document.createElement('div');
+                destination.className = 'next-train-destination';
+                destination.textContent = train.destination;
+                const meta = document.createElement('div');
+                meta.className = 'next-train-meta';
+                meta.textContent = `${isTomorrow ? 'พรุ่งนี้ · ' : ''}ถึง ${train.arrival} · ชานชาลา ${train.platform}`;
+                route.append(destination, meta);
+
+                const time = document.createElement('div');
+                time.className = 'next-train-time';
+                time.textContent = train.departure;
+
+                row.append(number, route, time);
+                list.append(row);
+            });
         }
 
         document.addEventListener('keydown', (event) => {
-            if (event.key === 'Escape') closeLightbox();
+            if (event.key === 'Escape') {
+                closeMoreMenu();
+                closeLightbox();
+            }
         });
 
         document.addEventListener('DOMContentLoaded', () => {
             const pageFromHash = (location.hash || '').replace('#', '');
-            if (pageFromHash && document.getElementById(pageFromHash)) {
-                const matchingBtn = Array.from(document.querySelectorAll('.nav-btn')).find(btn =>
-                    btn.getAttribute('onclick')?.includes("'" + pageFromHash + "'")
-                );
-                switchPage(pageFromHash, matchingBtn);
-            }
+            if (pageFromHash && document.getElementById(pageFromHash)) switchPage(pageFromHash);
+            else switchPage('home');
+            renderNextTrains();
         });
     </script>
 </body>
